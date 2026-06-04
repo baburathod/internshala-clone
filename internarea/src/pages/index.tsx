@@ -118,9 +118,10 @@ export default function SvgSlider() {
   useEffect(() => {
     const fetchdata = async () => {
       try {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
         const [internshipres, jobres] = await Promise.all([
-          axios.get("https://internshala-clone-y2p2.onrender.com/api/internship"),
-          axios.get("https://internshala-clone-y2p2.onrender.com/api/job"),
+          axios.get(`${baseUrl}/api/internship`),
+          axios.get(`${baseUrl}/api/job`),
         ]);
         setinternship(internshipres.data);
         setjob(jobres.data);
@@ -131,12 +132,12 @@ export default function SvgSlider() {
     fetchdata();
   }, []);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const filteredInternships = internships.filter(
+  const filteredInternships = Array.isArray(internships) ? internships.filter(
     (item: any) => !selectedCategory || item.category === selectedCategory
-  );
-  const filteredJobs = jobs.filter(
+  ) : [];
+  const filteredJobs = Array.isArray(jobs) ? jobs.filter(
     (item: any) => !selectedCategory || item.category === selectedCategory
-  );
+  ) : [];
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* hero section */}
@@ -264,8 +265,8 @@ export default function SvgSlider() {
         </div>
       </div>
       {/* INternship grid   */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {filteredInternships.map((internship: any, index: any) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {filteredInternships?.map((internship: any, index: any) => (
           <div
             key={index}
             className="bg-white rounded-lg shadow-md p-6 transition-transform hover:transform hover:scale-105"
@@ -310,8 +311,8 @@ export default function SvgSlider() {
       {/* Jobs grid   */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Jobs</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {filteredJobs.map((job: any, index: any) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {filteredJobs?.map((job: any, index: any) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-md p-6 transition-transform hover:transform hover:scale-105"

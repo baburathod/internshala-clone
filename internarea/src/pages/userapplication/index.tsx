@@ -13,6 +13,8 @@ import axios from "axios";
 import { selectuser } from "@/Feature/Userslice";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "@/Components/ProtectedRoute";
+import { useTranslation } from "react-i18next";
+
 const Applications = [
   {
     _id: "1",
@@ -50,6 +52,7 @@ const getStatusColor = (status: any) => {
   }
 };
 const index = () => {
+  const { t } = useTranslation();
   const [searchTerm, setsearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
   const user=useSelector(selectuser)
@@ -64,7 +67,7 @@ const index = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const res = await axios.get("https://internshala-clone-y2p2.onrender.com/api/application");
+        const res = await axios.get((process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/application");
         setdata(res.data);
       } catch (error) {
         console.log(error);
@@ -90,9 +93,9 @@ const index = () => {
         <div className="bg-white rounded-lg shadow-sm">
           {/* Header */}
           <div className="border-b border-gray-200 px-6 py-4">
-            <h1 className="text-2xl font-bold text-gray-900">My Applications</h1>
+            <h1 className="text-2xl font-bold text-gray-900">{t('dashboard.welcome')}</h1>
             <p className="mt-1 text-sm text-gray-500">
-              Track and manage your job and intenrhsip applications
+              {t('dashboard.stats')}
             </p>
           </div>
 

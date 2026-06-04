@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "home": "Accueil",
+    "internships": "Stages",
+    "jobs": "Emplois",
+    "community": "Communauté",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "language": "Langue",
+    "builder": "Créateur de CV",
+    "subscriptions": "Abonnements",
+    "verify_french": "Vérifier l'activation du français"
+  },
+  "login": {
+    "title": "Bienvenue",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "google": "Continuer avec Google",
+    "forgot": "Mot de passe oublié ?",
+    "submit": "Connexion",
+    "otp_title": "Contrôle de sécurité",
+    "otp_desc": "Veuillez entrer le mot de passe à usage unique envoyé à votre adresse e-mail.",
+    "verify": "Vérifier OTP",
+    "cancel": "Annuler"
+  },
+  "profile": {
+    "title": "Mon Profil",
+    "active_apps": "Candidatures actives",
+    "accepted_apps": "Candidatures acceptées",
+    "view_apps": "Voir les candidatures",
+    "history": "Sécurité et historique de connexion",
+    "date": "Date/Heure",
+    "browser": "Navigateur",
+    "os": "Système d'exploitation",
+    "ip": "Adresse IP",
+    "status": "Statut"
+  },
+  "community": {
+    "feed": "Flux communautaire",
+    "create_post": "Créer une publication",
+    "friends": "Amis",
+    "suggested": "Amis suggérés",
+    "post_placeholder": "A quoi pensez-vous ?",
+    "share": "Partager",
+    "like": "J'aime",
+    "comment": "Commenter"
+  },
+  "forgot_password": {
+    "title": "Mot de passe oublié",
+    "desc": "Entrez votre e-mail ou votre téléphone pour recevoir un mot de passe temporaire.",
+    "input": "E-mail ou téléphone",
+    "submit": "Envoyer le mot de passe temporaire"
+  },
+  "resume": {
+    "title": "Créez votre CV",
+    "details": "Détails personnels",
+    "education": "Éducation",
+    "experience": "Expérience",
+    "skills": "Compétences",
+    "save": "Enregistrer et continuer",
+    "pay": "Payer ₹50",
+    "download": "Télécharger et enregistrer"
+  },
+  "subscription": {
+    "title": "Améliorez votre parcours professionnel",
+    "desc": "Postulez à plus de stages et démarquez-vous.",
+    "current": "Utilisation actuelle",
+    "plan": "forfait",
+    "subscribe": "S'abonner"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue sur votre tableau de bord",
+    "stats": "Vos statistiques",
+    "apply": "Postulez maintenant",
+    "view_details": "Voir les détails"
+  }
+}

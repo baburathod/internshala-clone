@@ -1,91 +1,149 @@
 import { selectuser } from "@/Feature/Userslice";
-import { ExternalLink, Mail, User } from "lucide-react";
+import { ExternalLink, Mail, User, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "@/Components/ProtectedRoute";
-interface User {
-  name: string;
-  email: string;
-  photo: string;
-}
+import axios from "axios";
+import API_BASE_URL from "@/config/api";
+import { useTranslation } from "react-i18next";
+
 const index = () => {
-  // const [user, setuser] = useState<User | null>({
-  //   name: "Rahul",
-  //   email: "xyz@gmail.com",
-  //   photo:
-  //     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=faces",
-  // });
+  const { t } = useTranslation();
   const user = useSelector(selectuser);
+  const [history, setHistory] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      axios.get(`${API_BASE_URL}/auth/history/${user.uid}`)
+        .then(res => {
+          setHistory(res.data);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+    }
+  }, [user]);
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          {/* Profile Header */}
-          <div className="relative h-32 bg-gradient-to-r from-blue-500 to-blue-600">
-            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
-              {user?.photo ? (
-                <img
-                  src={user?.photo}
-                  alt={user?.name}
-                  className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
-                />
-              ) : (
-                <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-200 flex items-center justify-center">
-                  <User className="h-12 w-12 text-gray-400" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            {/* Profile Header */}
+            <div className="relative h-32 bg-gradient-to-r from-blue-500 to-blue-600">
+              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                {user?.photo ? (
+                  <img
+                    src={user?.photo}
+                    alt={user?.name}
+                    className="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+                  />
+                ) : (
+                  <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg bg-gray-200 flex items-center justify-center">
+                    <User className="h-12 w-12 text-gray-400" />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Profile Content */}
+            <div className="pt-16 pb-8 px-6">
+              <div className="text-center mb-8">
+                <h1 className="text-2xl font-bold text-gray-900">{user?.name}</h1>
+                <div className="mt-2 flex items-center justify-center text-gray-500">
+                  <Mail className="h-4 w-4 mr-2" />
+                  <span>{user?.email}</span>
                 </div>
-              )}
+              </div>
+
+              {/* Profile Details */}
+              <div className="space-y-6">
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-blue-50 rounded-lg p-4 text-center">
+                    <span className="text-blue-600 font-semibold text-2xl">
+                      0
+                    </span>
+                    <p className="text-blue-600 text-sm mt-1">
+                      {t('profile.active_apps')}
+                    </p>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-4 text-center">
+                    <span className="text-green-600 font-semibold text-2xl">
+                      0
+                    </span>
+                    <p className="text-green-600 text-sm mt-1">
+                      {t('profile.accepted_apps')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex justify-center pt-4">
+                  <Link
+                    href="/userapplication"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  >
+                    {t('profile.view_apps')}
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Profile Content */}
-          <div className="pt-16 pb-8 px-6">
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-bold text-gray-900">{user?.name}</h1>
-              <div className="mt-2 flex items-center justify-center text-gray-500">
-                <Mail className="h-4 w-4 mr-2" />
-                <span>{user?.email}</span>
+          {/* Login History Section */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+              <ShieldCheck className="mr-2 text-blue-600" /> {t('profile.history')}
+            </h2>
+            {loading ? (
+              <p className="text-gray-500">Loading history...</p>
+            ) : history.length > 0 ? (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200 text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">{t('profile.date')}</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">{t('profile.browser')}</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">{t('profile.os')}</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">{t('profile.ip')}</th>
+                      <th className="px-4 py-3 text-left font-semibold text-gray-600">{t('profile.status')}</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {history.map((record, idx) => (
+                      <tr key={idx}>
+                        <td className="px-4 py-3 text-gray-800 whitespace-nowrap">
+                          {new Date(record.timestamp).toLocaleString()}
+                        </td>
+                        <td className="px-4 py-3 text-gray-600">{record.browser}</td>
+                        <td className="px-4 py-3 text-gray-600">{record.os} ({record.deviceType})</td>
+                        <td className="px-4 py-3 text-gray-600 font-mono text-xs">{record.ipAddress}</td>
+                        <td className="px-4 py-3">
+                          <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                            record.status === 'Success' ? 'bg-green-100 text-green-800' :
+                            record.status === 'OTP_Pending' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-red-100 text-red-800'
+                          }`}>
+                            {record.status.replace('_', ' ')}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </div>
-
-            {/* Profile Details */}
-            <div className="space-y-6">
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-blue-50 rounded-lg p-4 text-center">
-                  <span className="text-blue-600 font-semibold text-2xl">
-                    0
-                  </span>
-                  <p className="text-blue-600 text-sm mt-1">
-                    Active Applications
-                  </p>
-                </div>
-                <div className="bg-green-50 rounded-lg p-4 text-center">
-                  <span className="text-green-600 font-semibold text-2xl">
-                    0
-                  </span>
-                  <p className="text-green-600 text-sm mt-1">
-                    Accepted Applications
-                  </p>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex justify-center pt-4">
-                <Link
-                  href="/userapplication"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                >
-                  View Applications
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-            </div>
+            ) : (
+              <p className="text-gray-500 italic">No login history found.</p>
+            )}
           </div>
         </div>
       </div>
-    </div>
     </ProtectedRoute>
   );
 };

@@ -1,7 +1,6 @@
 const mongoose=require("mongoose")
 require('dotenv').config()
-database=process.env.DATABASE_URL
-const url=database
+const url = process.env.MONGO_URI;
 module.exports.connect=()=>{
     mongoose.connect(url,console.log("Databse is connected"))
 }

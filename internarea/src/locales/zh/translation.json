@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "home": "首页",
+    "internships": "实习",
+    "jobs": "工作",
+    "community": "社区",
+    "login": "登录",
+    "register": "注册",
+    "profile": "个人资料",
+    "logout": "登出",
+    "language": "语言",
+    "builder": "简历生成器",
+    "subscriptions": "订阅",
+    "verify_french": "验证法语激活"
+  },
+  "login": {
+    "title": "欢迎回来",
+    "email": "电子邮件地址",
+    "password": "密码",
+    "google": "使用Google继续",
+    "forgot": "忘记密码？",
+    "submit": "登录",
+    "otp_title": "安全检查",
+    "otp_desc": "请输入发送到您电子邮箱的验证码。",
+    "verify": "验证OTP",
+    "cancel": "取消"
+  },
+  "profile": {
+    "title": "我的个人资料",
+    "active_apps": "有效申请",
+    "accepted_apps": "已接受申请",
+    "view_apps": "查看申请",
+    "history": "安全和登录历史",
+    "date": "日期/时间",
+    "browser": "浏览器",
+    "os": "操作系统",
+    "ip": "IP地址",
+    "status": "状态"
+  },
+  "community": {
+    "feed": "社区动态",
+    "create_post": "发布帖子",
+    "friends": "朋友",
+    "suggested": "推荐朋友",
+    "post_placeholder": "你在想什么？",
+    "share": "分享",
+    "like": "喜欢",
+    "comment": "评论"
+  },
+  "forgot_password": {
+    "title": "忘记密码",
+    "desc": "输入您的电子邮件或电话以接收临时密码。",
+    "input": "电子邮件或电话",
+    "submit": "发送临时密码"
+  },
+  "resume": {
+    "title": "建立你的简历",
+    "details": "个人信息",
+    "education": "教育",
+    "experience": "经验",
+    "skills": "技能",
+    "save": "保存并继续",
+    "pay": "支付 ₹50",
+    "download": "下载并保存"
+  },
+  "subscription": {
+    "title": "升级您的职业旅程",
+    "desc": "申请更多实习并脱颖而出。",
+    "current": "当前使用情况",
+    "plan": "计划",
+    "subscribe": "订阅"
+  },
+  "dashboard": {
+    "welcome": "欢迎来到您的仪表板",
+    "stats": "您的统计数据",
+    "apply": "立即申请",
+    "view_details": "查看详情"
+  }
+}

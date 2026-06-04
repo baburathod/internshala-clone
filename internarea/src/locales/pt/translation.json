@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "home": "Início",
+    "internships": "Estágios",
+    "jobs": "Vagas",
+    "community": "Comunidade",
+    "login": "Entrar",
+    "register": "Registrar",
+    "profile": "Perfil",
+    "logout": "Sair",
+    "language": "Idioma",
+    "builder": "Criador de currículos",
+    "subscriptions": "Assinaturas",
+    "verify_french": "Verificar ativação em francês"
+  },
+  "login": {
+    "title": "Bem-vindo de volta",
+    "email": "Endereço de email",
+    "password": "Senha",
+    "google": "Continuar com o Google",
+    "forgot": "Esqueceu a senha?",
+    "submit": "Entrar",
+    "otp_title": "Verificação de segurança",
+    "otp_desc": "Digite o OTP enviado para o seu e-mail.",
+    "verify": "Verificar OTP",
+    "cancel": "Cancelar"
+  },
+  "profile": {
+    "title": "Meu Perfil",
+    "active_apps": "Inscrições ativas",
+    "accepted_apps": "Inscrições aceitas",
+    "view_apps": "Ver inscrições",
+    "history": "Segurança e histórico de login",
+    "date": "Data/Hora",
+    "browser": "Navegador",
+    "os": "SO",
+    "ip": "Endereço IP",
+    "status": "Status"
+  },
+  "community": {
+    "feed": "Feed da comunidade",
+    "create_post": "Criar uma postagem",
+    "friends": "Amigos",
+    "suggested": "Amigos sugeridos",
+    "post_placeholder": "O que você está pensando?",
+    "share": "Compartilhar",
+    "like": "Curtir",
+    "comment": "Comentar"
+  },
+  "forgot_password": {
+    "title": "Esqueceu sua senha",
+    "desc": "Digite seu e-mail ou telefone para receber uma senha temporária.",
+    "input": "E-mail ou telefone",
+    "submit": "Enviar senha temporária"
+  },
+  "resume": {
+    "title": "Construa seu currículo",
+    "details": "Detalhes pessoais",
+    "education": "Educação",
+    "experience": "Experiência",
+    "skills": "Habilidades",
+    "save": "Salvar e continuar",
+    "pay": "Pagar ₹50",
+    "download": "Baixar e salvar"
+  },
+  "subscription": {
+    "title": "Atualize sua jornada de carreira",
+    "desc": "Candidate-se a mais estágios e destaque-se.",
+    "current": "Uso atual",
+    "plan": "plano",
+    "subscribe": "Assinar"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo ao seu painel",
+    "stats": "Suas estatísticas",
+    "apply": "Inscreva-se agora",
+    "view_details": "Ver detalhes"
+  }
+}

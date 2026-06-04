@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "home": "Home",
+    "internships": "Internships",
+    "jobs": "Jobs",
+    "community": "Community",
+    "login": "Login",
+    "register": "Register",
+    "profile": "Profile",
+    "logout": "Logout",
+    "language": "Language",
+    "builder": "Resume Builder",
+    "subscriptions": "Subscriptions",
+    "verify_french": "Verify French Activation"
+  },
+  "login": {
+    "title": "Welcome Back",
+    "email": "Email Address",
+    "password": "Password",
+    "google": "Continue with Google",
+    "forgot": "Forgot Password?",
+    "submit": "Login",
+    "otp_title": "Security Check",
+    "otp_desc": "Please enter the OTP sent to your email.",
+    "verify": "Verify OTP",
+    "cancel": "Cancel"
+  },
+  "profile": {
+    "title": "My Profile",
+    "active_apps": "Active Applications",
+    "accepted_apps": "Accepted Applications",
+    "view_apps": "View Applications",
+    "history": "Security & Login History",
+    "date": "Date/Time",
+    "browser": "Browser",
+    "os": "OS",
+    "ip": "IP Address",
+    "status": "Status"
+  },
+  "community": {
+    "feed": "Community Feed",
+    "create_post": "Create a Post",
+    "friends": "Friends",
+    "suggested": "Suggested Friends",
+    "post_placeholder": "What's on your mind?",
+    "share": "Share",
+    "like": "Like",
+    "comment": "Comment"
+  },
+  "forgot_password": {
+    "title": "Forgot Password",
+    "desc": "Enter your email or phone to receive a temporary password.",
+    "input": "Email or Phone",
+    "submit": "Send Temporary Password"
+  },
+  "resume": {
+    "title": "Build Your Resume",
+    "details": "Personal Details",
+    "education": "Education",
+    "experience": "Experience",
+    "skills": "Skills",
+    "save": "Save & Continue",
+    "pay": "Pay ₹50",
+    "download": "Download & Save"
+  },
+  "subscription": {
+    "title": "Upgrade Your Career Journey",
+    "desc": "Apply to more internships and stand out.",
+    "current": "Current Usage",
+    "plan": "plan",
+    "subscribe": "Subscribe"
+  },
+  "dashboard": {
+    "welcome": "Welcome to your Dashboard",
+    "stats": "Your Statistics",
+    "apply": "Apply Now",
+    "view_details": "View Details"
+  }
+}

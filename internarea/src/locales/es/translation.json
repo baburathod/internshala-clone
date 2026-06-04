@@ -1,0 +1,79 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "internships": "Pasantías",
+    "jobs": "Trabajos",
+    "community": "Comunidad",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión",
+    "language": "Idioma",
+    "builder": "Creador de currículums",
+    "subscriptions": "Suscripciones",
+    "verify_french": "Verificar activación en francés"
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "google": "Continuar con Google",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "submit": "Iniciar sesión",
+    "otp_title": "Control de seguridad",
+    "otp_desc": "Ingrese el OTP enviado a su correo electrónico.",
+    "verify": "Verificar OTP",
+    "cancel": "Cancelar"
+  },
+  "profile": {
+    "title": "Mi perfil",
+    "active_apps": "Aplicaciones activas",
+    "accepted_apps": "Aplicaciones aceptadas",
+    "view_apps": "Ver aplicaciones",
+    "history": "Seguridad e historial de inicio de sesión",
+    "date": "Fecha/Hora",
+    "browser": "Navegador",
+    "os": "Sistema operativo",
+    "ip": "Dirección IP",
+    "status": "Estado"
+  },
+  "community": {
+    "feed": "Feed de la comunidad",
+    "create_post": "Crear una publicación",
+    "friends": "Amigos",
+    "suggested": "Amigos sugeridos",
+    "post_placeholder": "¿Qué tienes en mente?",
+    "share": "Compartir",
+    "like": "Me gusta",
+    "comment": "Comentar"
+  },
+  "forgot_password": {
+    "title": "Has olvidado tu contraseña",
+    "desc": "Ingrese su correo electrónico o teléfono para recibir una contraseña temporal.",
+    "input": "Correo electrónico o teléfono",
+    "submit": "Enviar contraseña temporal"
+  },
+  "resume": {
+    "title": "Crea tu currículum",
+    "details": "Detalles personales",
+    "education": "Educación",
+    "experience": "Experiencia",
+    "skills": "Habilidades",
+    "save": "Guardar y continuar",
+    "pay": "Pagar ₹50",
+    "download": "Descargar y guardar"
+  },
+  "subscription": {
+    "title": "Mejora tu carrera",
+    "desc": "Solicita más pasantías y destaca.",
+    "current": "Uso actual",
+    "plan": "plan",
+    "subscribe": "Suscribirse"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido a tu tablero",
+    "stats": "Tus estadísticas",
+    "apply": "Aplica ya",
+    "view_details": "Ver detalles"
+  }
+}

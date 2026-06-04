@@ -127,7 +127,7 @@ const index = () => {
   useEffect(()=>{
     const fetchdata=async()=>{
       try {
-        const res=await axios.get( "https://internshala-clone-y2p2.onrender.com/api/job")     
+        const res=await axios.get( (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/job")     
         setjob(res.data)
         setfilteredjobs(res.data)
       } catch (error) {
