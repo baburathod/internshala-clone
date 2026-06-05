@@ -10,6 +10,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const index = () => {
@@ -124,6 +125,17 @@ const index = () => {
     experience: "",
   });
   const [filteredJobs,setjob]=useState<any>([])
+  const router = useRouter();
+
+  useEffect(() => {
+    if (router.isReady && router.query.category) {
+      setfilters((prev) => ({
+        ...prev,
+        category: router.query.category as string,
+      }));
+    }
+  }, [router.isReady, router.query.category]);
+
   useEffect(()=>{
     const fetchdata=async()=>{
       try {

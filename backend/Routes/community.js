@@ -31,7 +31,8 @@ const enforcePostingLimit = async (req, res, next) => {
 
     let limit = 0;
     if (friendCount === 1) limit = 1;
-    else if (friendCount >= 2 && friendCount <= 10) limit = 2;
+    else if (friendCount === 2) limit = 2;
+    else if (friendCount >= 3 && friendCount <= 10) limit = friendCount;
     else if (friendCount > 10) limit = Infinity;
 
     if (friendCount === 0) {
@@ -156,6 +157,12 @@ router.get("/friends/requests/:uid", async (req, res) => {
 router.post("/posts", enforcePostingLimit, async (req, res) => {
   try {
     const { text, image, video } = req.body;
+    
+    // Backend character limits
+    if (text && text.length > 1000) {
+      return res.status(400).json({ error: "Post text exceeds maximum limit of 1000 characters." });
+    }
+
     const post = new Post({
       user: req.dbUser._id,
       text,

@@ -1,23 +1,24 @@
 import { Facebook, Twitter, Instagram } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-800 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <FooterSection title="Internship by places" items={["New York", "Los Angeles", "Chicago", "San Francisco", "Miami", "Seattle"]} />
-          <FooterSection title="Internship by stream" items={["About us", "Careers", "Press", "News", "Media kit", "Contact"]} />
-          <FooterSection title="Job Places" items={["Blog", "Newsletter", "Events", "Help center", "Tutorials", "Supports"]} links />
-          <FooterSection title="Jobs by streams" items={["Startups", "Enterprise", "Government", "SaaS", "Marketplaces", "Ecommerce"]} links />
+          <FooterSection title="Internship by places" items={[{name:"New York", href:"/"}, {name:"Los Angeles", href:"/"}, {name:"Chicago", href:"/"}, {name:"San Francisco", href:"/"}, {name:"Miami", href:"/"}, {name:"Seattle", href:"/"}]} />
+          <FooterSection title="Company" items={[{name:"About us", href:"/about"}, {name:"Careers", href:"/careers"}, {name:"Press", href:"/news"}, {name:"News", href:"/news"}, {name:"Media kit", href:"/media-kit"}, {name:"Contact", href:"/contact"}]} links />
+          <FooterSection title="Resources" items={[{name:"Blog", href:"/blog"}, {name:"Newsletter", href:"/news"}, {name:"Events", href:"/events"}, {name:"Help center", href:"/help-center"}, {name:"Tutorials", href:"/help-center"}, {name:"Supports", href:"/contact"}]} links />
+          <FooterSection title="Solutions" items={[{name:"Startups", href:"/startups"}, {name:"Enterprise", href:"/enterprise"}, {name:"Government", href:"/government"}, {name:"SaaS", href:"/saas"}, {name:"Marketplaces", href:"/ecommerce"}, {name:"Ecommerce", href:"/ecommerce"}]} links />
         </div>
 
         <hr className="my-10 border-gray-600" />
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          <FooterSection title="About us" items={["Startups", "Enterprise"]} links />
-          <FooterSection title="Team diary" items={["Startups", "Enterprise"]} links />
-          <FooterSection title="Terms and conditions" items={["Startups", "Enterprise"]} links />
-          <FooterSection title="Sitemap" items={["Startups"]} links />
+          <FooterSection title="About us" items={[{name:"Startups", href:"/startups"}, {name:"Enterprise", href:"/enterprise"}]} links />
+          <FooterSection title="Team diary" items={[{name:"Blog", href:"/blog"}]} links />
+          <FooterSection title="Legal" items={[{name:"Terms and conditions", href:"/terms"}, {name:"Privacy Policy", href:"/privacy-policy"}]} links />
+          <FooterSection title="Sitemap" items={[{name:"Sitemap", href:"/"}]} links />
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-between items-center">
@@ -43,12 +44,12 @@ function FooterSection({ title, items, links }:any) {
       <div className="flex flex-col items-start mt-4 space-y-3">
         {items.map((item:any, index:any) =>
           links ? (
-            <a key={index} href="/" className="text-gray-400 hover:text-blue-400 hover:underline">
-              {item}
-            </a>
+            <Link key={index} href={item.href || "/"} className="text-gray-400 hover:text-blue-400 hover:underline">
+              {item.name}
+            </Link>
           ) : (
             <p key={index} className="text-gray-400 hover:text-blue-400 hover:underline cursor-pointer">
-              {item}
+              {item.name}
             </p>
           )
         )}
