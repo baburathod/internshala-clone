@@ -3,7 +3,7 @@ import logo from "../Assets/logo.png";
 import Link from "next/link";
 import { auth, provider } from "../firebase/firebase";
 import { ChevronDown, ChevronUp, Search, Menu, X, Globe } from "lucide-react";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { signInWithRedirect, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectuser, selectIsLoading } from "@/Feature/Userslice";
@@ -32,10 +32,10 @@ const Navbar = () => {
 
   const handlelogin = async () => {
     try {
-      await signInWithPopup(auth, provider);
-      toast.success("logged in successfully");
+      await signInWithRedirect(auth, provider);
+      // Removed toast.success since the page will redirect
     } catch (error) {
-      console.error("signInWithPopup error:", error);
+      console.error("signInWithRedirect error:", error);
       toast.error("login failed");
     }
   };
