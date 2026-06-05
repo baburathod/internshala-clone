@@ -27,13 +27,13 @@ function AuthListener({ setShowOtpModal, setPendingAuthUser }: { setShowOtpModal
             name: authuser.displayName,
             email: authuser.email,
             photo: authuser.photoURL,
-          });
+          }).catch(err => console.error("Backend sync failed:", err));
 
           // Verify Login Constraints & Chrome OTP
           const verifyRes = await axios.post(`${API_BASE_URL}/api/auth/verify-login`, { uid: authuser.uid })
             .catch(err => err.response);
 
-          if (verifyRes.status === 200) {
+          if (verifyRes && verifyRes.status === 200) {
             // Direct Success (Not Chrome, Not Restricted)
             dispatch(login({
               uid: authuser.uid,
@@ -42,18 +42,23 @@ function AuthListener({ setShowOtpModal, setPendingAuthUser }: { setShowOtpModal
               email: authuser.email,
               phoneNumber: authuser.phoneNumber,
             }));
-          } else if (verifyRes.status === 401 && verifyRes.data.error === "OTP_REQUIRED") {
+          } else if (verifyRes && verifyRes.status === 401 && verifyRes.data?.error === "OTP_REQUIRED") {
             // Chrome User -> OTP Required
             setPendingAuthUser(authuser);
             setShowOtpModal(true);
-          } else if (verifyRes.status === 403) {
+          } else if (verifyRes && verifyRes.status === 403) {
             // Mobile Time Restriction Failed
-            toast.error(verifyRes.data.error || "Login restricted from this device at this time.");
+            toast.error(verifyRes.data?.error || "Login restricted from this device at this time.");
             await signOut(auth);
             dispatch(logout());
           } else {
-            // Unknown Error
-            toast.error("Failed to verify login.");
+            // Unknown Error or Network Error
+            console.error("Failed to verify login, verifyRes:", verifyRes);
+            if (!verifyRes) {
+               toast.error("Network Error: Could not reach backend API.");
+            } else {
+               toast.error("Failed to verify login.");
+            }
             await signOut(auth);
             dispatch(logout());
           }

@@ -3,7 +3,7 @@ import logo from "../Assets/logo.png";
 import Link from "next/link";
 import { auth, provider } from "../firebase/firebase";
 import { ChevronDown, ChevronUp, Search, Menu, X, Globe } from "lucide-react";
-import { signInWithRedirect, signOut } from "firebase/auth";
+import { signInWithRedirect, signOut, getRedirectResult } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectuser, selectIsLoading } from "@/Feature/Userslice";
@@ -29,6 +29,17 @@ const Navbar = () => {
     { code: "zh", name: "Chinese" },
     { code: "fr", name: "French" },
   ];
+
+  useEffect(() => {
+    getRedirectResult(auth).then((result) => {
+      if (result) {
+        // Successful login, onAuthStateChanged will handle state
+      }
+    }).catch((error) => {
+      console.error("Redirect Error:", error);
+      toast.error(error.message || "Failed to complete login redirect");
+    });
+  }, []);
 
   const handlelogin = async () => {
     try {
