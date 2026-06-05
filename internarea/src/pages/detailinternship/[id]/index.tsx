@@ -116,8 +116,8 @@ const index = () => {
         availability
       }
       await axios.post((process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000") + "/api/application",applicationdata)
-      toast.success("Application submit successfully")
-      router.push('/internship')
+      toast.success("Application submit successfully");
+      router.push("/userapplication");
     } catch (error) {
       console.error(error)
       toast.error("Failed to submit application")

@@ -166,7 +166,7 @@ const index = () => {
         applicationdata
       );
       toast.success("Application submit successfully");
-      router.push("/job");
+      router.push("/userapplication");
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit application");

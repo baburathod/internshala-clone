@@ -3,11 +3,12 @@ const dotenv = require("dotenv");
 const Job = require("../Model/Job");
 const Internship = require("../Model/Internship");
 
-dotenv.config({ path: "../.env" });
+const path = require("path");
+dotenv.config({ path: path.join(__dirname, "../.env") });
 
 const MONGODB_URI = process.env.MONGO_URI || "mongodb+srv://user:pass@cluster.mongodb.net/dbname";
 
-const categories = ["Engineering", "Marketing", "Design", "Data Science", "Media", "Finance", "HR", "Sales"];
+const categories = ["Engineering", "Marketing", "Design", "Data Science", "Media", "Finance", "HR", "Sales", "MBA"];
 const locations = ["Mumbai", "Bangalore", "Delhi", "Pune", "Hyderabad", "Remote"];
 const companies = ["TechCorp", "Innovate LLC", "Global Solutions", "Big Brands Inc", "StartUp Nation", "Enterprise Systems"];
 
@@ -28,12 +29,13 @@ async function seedData() {
     const jobs = [];
     for (let i = 1; i <= 25; i++) {
       const isWfh = Math.random() > 0.5;
+      const cat = randomChoice(categories);
       jobs.push({
-        title: `${randomChoice(categories)} Specialist ${i}`,
+        title: `${cat} Specialist ${i}`,
         company: randomChoice(companies),
         location: isWfh ? "Remote" : randomChoice(locations),
         Experience: `${Math.floor(Math.random() * 5)} - ${Math.floor(Math.random() * 5) + 3} Years`,
-        category: randomChoice(categories),
+        category: cat,
         aboutCompany: "We are a fast-growing company looking for passionate individuals.",
         aboutJob: "You will be responsible for building cutting-edge solutions and driving growth.",
         whoCanApply: "Anyone with relevant skills and a proactive mindset.",
@@ -49,11 +51,12 @@ async function seedData() {
     const internships = [];
     for (let i = 1; i <= 25; i++) {
       const isWfh = Math.random() > 0.5;
+      const cat = randomChoice(categories);
       internships.push({
-        title: `${randomChoice(categories)} Intern ${i}`,
+        title: `${cat} Intern ${i}`,
         company: randomChoice(companies),
         location: isWfh ? "Remote" : randomChoice(locations),
-        category: randomChoice(categories),
+        category: cat,
         aboutCompany: "A dynamic startup offering great learning opportunities.",
         aboutInternship: "Learn the ropes from industry veterans and work on live projects.",
         whoCanApply: "Students currently in their pre-final or final year.",

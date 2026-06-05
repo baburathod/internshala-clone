@@ -28,9 +28,19 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
     }
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const link = `${window.location.origin}/community/post/${post._id}`;
     navigator.clipboard.writeText(link);
+    
+    if (user) {
+      try {
+        await axios.post(`${API_BASE_URL}/posts/${post._id}/share`, { uid: user.uid });
+        onPostUpdated();
+      } catch (error) {
+        console.error("Error recording share", error);
+      }
+    }
+    
     toast.success("Link copied to clipboard!");
   };
 
@@ -70,7 +80,10 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
       {/* Stats */}
       <div className="px-4 py-2 border-b border-gray-100 flex justify-between text-sm text-gray-500">
         <span>{post.likes?.length || 0} Likes</span>
-        <span>{post.comments?.length || 0} Comments</span>
+        <div className="space-x-3">
+          <span>{post.comments?.length || 0} Comments</span>
+          <span>{post.shares?.length || 0} Shares</span>
+        </div>
       </div>
 
       {/* Actions */}

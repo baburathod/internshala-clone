@@ -133,10 +133,22 @@ export default function SvgSlider() {
   }, []);
   const [selectedCategory, setSelectedCategory] = useState("");
   const filteredInternships = Array.isArray(internships) ? internships.filter(
-    (item: any) => !selectedCategory || item.category === selectedCategory
+    (item: any) => {
+      if (!selectedCategory) return true;
+      if (selectedCategory === "Work From Home") return item.workFromHome === true;
+      if (selectedCategory === "Part-time") return item.partTime === true;
+      if (selectedCategory === "Big Brands") return item.company === "Big Brands Inc";
+      return item.category === selectedCategory;
+    }
   ) : [];
   const filteredJobs = Array.isArray(jobs) ? jobs.filter(
-    (item: any) => !selectedCategory || item.category === selectedCategory
+    (item: any) => {
+      if (!selectedCategory) return true;
+      if (selectedCategory === "Work From Home") return item.workFromHome === true;
+      if (selectedCategory === "Part-time") return item.partTime === true;
+      if (selectedCategory === "Big Brands") return item.company === "Big Brands Inc";
+      return item.category === selectedCategory;
+    }
   ) : [];
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -310,7 +322,7 @@ export default function SvgSlider() {
                 Internship
               </span>
               <Link
-                href={`/detailiternship/${internship._id}`}
+                href={`/detailinternship/${internship._id}`}
                 className="text-blue-600 hover:text-blue-700 flex items-center gap-1"
               >
                 View details
@@ -361,7 +373,7 @@ export default function SvgSlider() {
                   Jobs
                 </span>
                 <Link
-                  href={`/detailInternship?q=${job._id}`}
+                  href={`/detailjob/${job._id}`}
                   className="text-blue-600 hover:text-blue-700 flex items-center gap-1"
                 >
                   View details

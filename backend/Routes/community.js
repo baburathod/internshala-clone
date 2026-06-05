@@ -234,4 +234,22 @@ router.post("/posts/:postId/comment", async (req, res) => {
   }
 });
 
+// Share Post
+router.post("/posts/:postId/share", async (req, res) => {
+  try {
+    const { uid } = req.body;
+    const user = await User.findOne({ uid });
+    const post = await Post.findById(req.params.postId);
+
+    if (!post.shares.includes(user._id)) {
+      post.shares.push(user._id);
+      await post.save();
+    }
+    
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

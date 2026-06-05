@@ -16,7 +16,7 @@ const index = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get(`${API_BASE_URL}/auth/history/${user.uid}`)
+      axios.get(`${API_BASE_URL}/api/auth/history/${user.uid}`)
         .then(res => {
           setHistory(res.data);
           setLoading(false);
