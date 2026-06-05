@@ -148,7 +148,14 @@ export default function SvgSlider() {
         <p className="text-xl text-gray-600">Trending on InternArea 🔥</p>
       </div>
       {/* Swiper section */}
-      <div className="mb-16">
+      <div className="mb-16 relative">
+        <style>{`
+          @media (max-width: 768px) {
+            .swiper-button-next, .swiper-button-prev {
+              transform: scale(0.6) !important;
+            }
+          }
+        `}</style>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}
@@ -232,8 +239,8 @@ export default function SvgSlider() {
                 </div>
 
                 {/* Content */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <h2 className="text-4xl font-bold text-white">
+                <div className="absolute inset-0 flex items-center justify-center px-12 md:px-24 text-center">
+                  <h2 className="text-2xl md:text-4xl font-bold text-white leading-tight">
                     {slide.title}
                   </h2>
                 </div>
