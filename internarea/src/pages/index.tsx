@@ -266,6 +266,11 @@ export default function SvgSlider() {
       </div>
       {/* INternship grid   */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {filteredInternships?.length === 0 && (
+          <div className="col-span-full py-12 text-center text-gray-500 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+            No internships found for this category yet.
+          </div>
+        )}
         {filteredInternships?.map((internship: any, index: any) => (
           <div
             key={index}
@@ -312,6 +317,11 @@ export default function SvgSlider() {
       <div className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Latest Jobs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {filteredJobs?.length === 0 && (
+            <div className="col-span-full py-12 text-center text-gray-500 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+              No jobs found for this category yet.
+            </div>
+          )}
           {filteredJobs?.map((job: any, index: any) => (
             <div
               key={index}

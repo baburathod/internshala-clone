@@ -254,7 +254,7 @@ const index = () => {
               {/* Stipend Range */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Annula Salary (₹ in lakhs)
+                  Annual Salary (₹ in lakhs)
                 </label>
                 <input
                   type="range"
@@ -431,7 +431,7 @@ const index = () => {
               {/* Stipend Range */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Annula Salary (₹ in lakhs)
+                  Annual Salary (₹ in lakhs)
                 </label>
                 <input
                   type="range"
