@@ -188,6 +188,44 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 absolute w-full shadow-lg">
+          <div className="px-4 pt-2 pb-4 space-y-2">
+            <Link href={"/internship"} className="block text-gray-700 hover:text-blue-600 py-2">
+              {t('navbar.internships')}
+            </Link>
+            <Link href={"/job"} className="block text-gray-700 hover:text-blue-600 py-2">
+              {t('navbar.jobs')}
+            </Link>
+            <Link href={"/community"} className="block text-gray-700 hover:text-blue-600 py-2">
+              {t('navbar.community')}
+            </Link>
+            <Link href={"/subscriptions"} className="block text-gray-700 hover:text-blue-600 py-2">
+              {t('navbar.subscriptions')}
+            </Link>
+            
+            <div className="pt-2 border-t border-gray-200">
+              {user ? (
+                <button
+                  className="w-full text-left text-gray-700 hover:text-blue-600 py-2"
+                  onClick={handlelogout}
+                >
+                  {t('navbar.logout')}
+                </button>
+              ) : (
+                <button
+                  onClick={handlelogin}
+                  className="w-full text-center bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700 mt-2"
+                >
+                  {t('navbar.login')}
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* French OTP Modal */}
       {showFrenchOtp && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
