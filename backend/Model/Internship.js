@@ -12,6 +12,8 @@ const Internshipschema = new mongoose.Schema({
   stipend: String,
   startDate: String,
   additionalInfo: String,
+  workFromHome: { type: Boolean, default: false },
+  partTime: { type: Boolean, default: false },
   createdAt: {
     type: Date,
     default: Date.now,

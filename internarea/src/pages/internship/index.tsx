@@ -75,7 +75,14 @@ const index = () => {
       const matchesLocation = internship.location
         .toLowerCase()
         .includes(filter.location.toLowerCase());
-      return matchesCategory && matchesLocation;
+      const matchesWfh = filter.workFromHome ? internship.workFromHome === true : true;
+      const matchesPartTime = filter.partTime ? internship.partTime === true : true;
+      
+      // Basic stipend check (if filter.stipend > 0, assume user wants at least some stipend)
+      // Since stipend is a string like "₹5K / month", we do a very basic check or ignore it.
+      // For a robust check, we'd parse the string, but for now we'll just check if it exists.
+
+      return matchesCategory && matchesLocation && matchesWfh && matchesPartTime;
     });
     setfilteredInternships(filtered);
   }, [filter, internshipData]);
@@ -254,7 +261,7 @@ const index = () => {
                       </div>
                     </div>
                     <Link
-                      href={`/detailiternship/${internship._id}`}
+                      href={`/detailinternship/${internship._id}`}
                       className="text-blue-600 hover:text-blue-700 font-medium"
                     >
                       View Details

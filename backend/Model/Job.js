@@ -12,6 +12,8 @@ const JobShcema = new mongoose.Schema({
   AdditionalInfo: String,
   CTC: String,
   StartDate: String,
+  workFromHome: { type: Boolean, default: false },
+  partTime: { type: Boolean, default: false },
   createAt: {
     type: Date,
     default: Date.now,

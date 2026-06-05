@@ -144,7 +144,11 @@ const index = () => {
       const matchesLocation = job.location
         .toLowerCase()
         .includes(filter.location.toLowerCase());
-      return matchesCategory && matchesLocation;
+      
+      const matchesWfh = filter.workFromHome ? job.workFromHome === true : true;
+      const matchesPartTime = filter.partTime ? job.partTime === true : true;
+
+      return matchesCategory && matchesLocation && matchesWfh && matchesPartTime;
     });
     setfilteredjobs(filtered);
   }, [filter, filteredJobs]);
