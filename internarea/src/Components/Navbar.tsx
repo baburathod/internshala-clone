@@ -274,15 +274,35 @@ const Navbar = () => {
                   <Link href={"/security"} className="text-gray-700 hover:text-blue-600 font-medium transition whitespace-nowrap">
                     Security
                   </Link>
-                  <Link href={"/profile"} className="flex-shrink-0">
-                    <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
-                  </Link>
-                  <button
-                    className="text-gray-700 hover:text-red-600 font-medium transition whitespace-nowrap"
-                    onClick={handlelogout}
-                  >
-                    {t('navbar.logout')}
-                  </button>
+                  <div className="relative">
+                    <button 
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+                      className="flex items-center focus:outline-none flex-shrink-0"
+                    >
+                      <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
+                    </button>
+                    
+                    {isDropdownOpen && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border z-50">
+                        <Link 
+                          href={"/profile"} 
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-medium"
+                          onClick={() => setIsDropdownOpen(false)}
+                        >
+                          Profile
+                        </Link>
+                        <button
+                          className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 font-medium"
+                          onClick={() => {
+                            setIsDropdownOpen(false);
+                            handlelogout();
+                          }}
+                        >
+                          {t('navbar.logout')}
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <>
