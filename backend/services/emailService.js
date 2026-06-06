@@ -7,7 +7,12 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.SMTP_USER || "test_user",
     pass: process.env.SMTP_PASS || "test_pass"
-  }
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  // Force IPv4 because Render's free tier has issues reaching Gmail over IPv6
+  family: 4
 });
 
 const sendResetEmail = async (email, newPassword) => {

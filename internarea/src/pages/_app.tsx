@@ -119,6 +119,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
       <Provider store={store}>
+        <Head>
+          <title>Intern Area - Find Internships & Jobs</title>
+        </Head>
         <AuthListener setShowOtpModal={setShowOtpModal} setPendingAuthUser={setPendingAuthUser} />
         <div className="bg-white dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <ToastContainer/>
