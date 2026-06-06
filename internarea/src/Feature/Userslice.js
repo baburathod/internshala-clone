@@ -8,11 +8,9 @@ export const userslice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log("[DEBUG-REDUX] login reducer called with payload:", action.payload);
       state.user = action.payload;
     },
     logout: (state) => {
-      console.log("[DEBUG-REDUX] logout reducer called");
       state.user = null;
     },
     setLoading: (state, action) => {
