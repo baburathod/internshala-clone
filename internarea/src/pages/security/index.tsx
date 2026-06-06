@@ -14,7 +14,7 @@ const SecurityDashboard = () => {
 
   useEffect(() => {
     if (user) {
-      axios.post(`${API_BASE_URL}/api/auth/login-history`, { uid: user.uid })
+      axios.get(`${API_BASE_URL}/api/auth/history/${user.uid}`)
         .then(res => setHistory(res.data))
         .catch(err => console.error(err))
         .finally(() => setLoading(false));
