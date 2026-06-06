@@ -138,7 +138,7 @@ const Navbar = () => {
               </a>
             </div>
             {/* Navigation Links */}
-            <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-6">
               <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/internship"}>
                   <span>{t('navbar.internships')}</span>
@@ -175,7 +175,7 @@ const Navbar = () => {
             </div>
 
             {/* Auth Buttons & Lang Selector (Desktop) */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
               
               <div className="relative">
                 <button 
@@ -186,7 +186,7 @@ const Navbar = () => {
                   <span className="uppercase">{i18n.language}</span>
                 </button>
                 {showLangMenu && (
-                  <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 border">
+                  <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 border z-50">
                     {languages.map(lang => (
                       <button
                         key={lang.code}
@@ -203,7 +203,7 @@ const Navbar = () => {
               {isLoading ? (
                 <div className="w-24 h-8 bg-gray-200 animate-pulse rounded-lg"></div>
               ) : user ? (
-                <div className="relative flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
+                <div className="relative flex items-center space-x-3 lg:space-x-5 flex-shrink-0">
                   
                   {/* Theme Toggle */}
                   <button 
