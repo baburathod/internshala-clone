@@ -1,19 +1,15 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Fotter';
 
 export default function helpcenterPage() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="bg-gray-50 flex flex-col">
       <Head>
         <title>Help Center | Intern Area - Real World Internships</title>
         <meta name="description" content="Find answers to common questions quickly.. Find out more about our mission, hiring, and salaries." />
         <meta name="keywords" content="Help Center, jobs, internships, careers, Intern Area" />
       </Head>
-
-      <Navbar />
 
       <main className="flex-grow">
         {/* Hero Section */}
@@ -78,8 +74,6 @@ export default function helpcenterPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

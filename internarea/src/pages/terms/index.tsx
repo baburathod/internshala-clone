@@ -1,19 +1,15 @@
 
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Fotter';
 
 export default function termsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="bg-gray-50 flex flex-col">
       <Head>
         <title>Terms & Conditions | Intern Area - Real World Internships</title>
         <meta name="description" content="The rules governing the use of Intern Area.. Find out more about our mission, hiring, and salaries." />
         <meta name="keywords" content="Terms & Conditions, jobs, internships, careers, Intern Area" />
       </Head>
-
-      <Navbar />
 
       <main className="flex-grow">
         {/* Hero Section */}
@@ -78,8 +74,6 @@ export default function termsPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -43,19 +43,15 @@ const pages = [
 const template = (page) => `
 import React from 'react';
 import Head from 'next/head';
-import Navbar from '@/Components/Navbar';
-import Footer from '@/Components/Fotter';
 
 export default function ${page.slug.replace(/[^a-zA-Z]/g, '')}Page() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="bg-gray-50 flex flex-col">
       <Head>
         <title>${page.title} | Intern Area - Real World Internships</title>
         <meta name="description" content="${page.purpose}. Find out more about our mission, hiring, and salaries." />
         <meta name="keywords" content="${page.title}, jobs, internships, careers, Intern Area" />
       </Head>
-
-      <Navbar />
 
       <main className="flex-grow">
         {/* Hero Section */}
@@ -120,8 +116,6 @@ export default function ${page.slug.replace(/[^a-zA-Z]/g, '')}Page() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
