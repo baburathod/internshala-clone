@@ -117,6 +117,11 @@ const Navbar = () => {
                   <span>{t('navbar.subscriptions')}</span>
                 </Link>
               </button>
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+                <Link href={"/resume-builder"}>
+                  <span>Resume Builder</span>
+                </Link>
+              </button>
               <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
                 <Search size={16} className="text-gray-400" />
                 <input
@@ -207,6 +212,9 @@ const Navbar = () => {
             </Link>
             <Link href={"/subscriptions"} className="block text-gray-700 hover:text-blue-600 py-2">
               {t('navbar.subscriptions')}
+            </Link>
+            <Link href={"/resume-builder"} className="block text-gray-700 hover:text-blue-600 py-2">
+              Resume Builder
             </Link>
             
             <div className="pt-2 border-t border-gray-200">
