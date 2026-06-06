@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import ProtectedRoute from '@/Components/ProtectedRoute';
 import { Check, X, Shield, Zap, Crown, AlertCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { loadRazorpay } from '@/utils/loadRazorpay';
 
 const plans = [
   {
@@ -52,12 +53,6 @@ const Subscriptions: React.FC = () => {
   const [appsUsed, setAppsUsed] = useState(0);
 
   useEffect(() => {
-    // Load razorpay
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-
     // Fetch user plan details (simulating by querying sync or assuming user has it)
     if (user) {
       axios.post(`${API_BASE_URL}/api/users/sync`, { uid: user.uid, name: user.name, email: user.email, photo: user.photo })
@@ -76,6 +71,12 @@ const Subscriptions: React.FC = () => {
 
     setLoading(true);
     try {
+      const res = await loadRazorpay();
+      if (!res) {
+        toast.error("Razorpay SDK failed to load. Are you offline?");
+        return;
+      }
+      
       const { data: orderData } = await axios.post(`${API_BASE_URL}/api/subscription/create-order`, { 
         uid: user.uid, 
         plan: planName 

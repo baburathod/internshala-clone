@@ -8,6 +8,7 @@ import { FileText, CheckCircle, CreditCard, Download, Mail } from 'lucide-react'
 import ProtectedRoute from '@/Components/ProtectedRoute';
 import ResumeTemplate, { ResumeData } from '@/Components/ResumeTemplate';
 import html2canvas from 'html2canvas';
+import { loadRazorpay } from '@/utils/loadRazorpay';
 import { jsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
 
@@ -31,13 +32,7 @@ const ResumeBuilder: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const pdfRef = useRef<HTMLDivElement>(null);
 
-  // Load Razorpay Script
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
+
 
   // --- Step 1: Form Handlers ---
   const handleNextToOTP = async () => {
@@ -86,6 +81,12 @@ const ResumeBuilder: React.FC = () => {
   const handlePayment = async () => {
     setLoading(true);
     try {
+      const res = await loadRazorpay();
+      if (!res) {
+        toast.error("Razorpay SDK failed to load. Are you offline?");
+        return;
+      }
+      
       const { data: orderData } = await axios.post(`${API_BASE_URL}/api/resume/create-order`, { resumeId });
       
       const options = {
