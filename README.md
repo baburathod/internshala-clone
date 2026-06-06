@@ -154,13 +154,7 @@ SMTP_PASS=your_app_password
 3. Set the build command to `npm install` and start command to `node index.js`.
 4. Add backend environment variables (MongoDB URI, SMTP credentials, etc.).
 
-## Screenshots
 
-![Homepage Slider](https://via.placeholder.com/800x400.png?text=Homepage+Slider+View)
-![Job Filters](https://via.placeholder.com/800x400.png?text=Advanced+Job+Filtering)
-![Community Forum](https://via.placeholder.com/800x400.png?text=Community+Forum+and+Posts)
-
-## Future Improvements
 
 - **Admin Dashboard:** A secure panel to approve, reject, or manually curate job and internship postings.
 - **Server-Side Rendering (SSR):** Migrate job fetching to `getServerSideProps` to improve SEO ranking for individual job listings.
