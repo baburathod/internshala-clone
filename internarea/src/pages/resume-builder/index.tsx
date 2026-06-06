@@ -12,10 +12,12 @@ import { jsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
 
 const initialData: ResumeData = {
-  personalDetails: { fullName: '', email: '', phone: '', linkedin: '' },
+  personalDetails: { fullName: '', email: '', phone: '', linkedin: '', address: '', photo: '', profileSummary: '' },
   education: [],
   experience: [],
-  skills: []
+  skills: [],
+  projects: [],
+  certifications: []
 };
 
 const ResumeBuilder: React.FC = () => {
@@ -60,6 +62,8 @@ const ResumeBuilder: React.FC = () => {
 
   const addEducation = () => setData(prev => ({ ...prev, education: [...prev.education, { degree: '', institution: '', year: '' }] }));
   const addExperience = () => setData(prev => ({ ...prev, experience: [...prev.experience, { title: '', company: '', duration: '', description: '' }] }));
+  const addProject = () => setData(prev => ({ ...prev, projects: [...prev.projects, { title: '', description: '', link: '' }] }));
+  const addCertification = () => setData(prev => ({ ...prev, certifications: [...prev.certifications, { name: '', issuer: '', year: '' }] }));
   const addSkill = (skill: string) => { if(skill) setData(prev => ({ ...prev, skills: [...prev.skills, skill] })) };
 
   // --- Step 2: OTP Handlers ---
@@ -191,11 +195,14 @@ const ResumeBuilder: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center"><FileText className="mr-2 text-blue-600"/> {t('resume.title')}</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Full Name" className="border p-3 rounded" value={data.personalDetails.fullName} onChange={e => setData({...data, personalDetails: {...data.personalDetails, fullName: e.target.value}})} />
-                  <input type="email" placeholder="Email Address" className="border p-3 rounded" value={data.personalDetails.email} onChange={e => setData({...data, personalDetails: {...data.personalDetails, email: e.target.value}})} />
+                  <input type="text" placeholder="Full Name *" className="border p-3 rounded" value={data.personalDetails.fullName} onChange={e => setData({...data, personalDetails: {...data.personalDetails, fullName: e.target.value}})} />
+                  <input type="email" placeholder="Email Address *" className="border p-3 rounded" value={data.personalDetails.email} onChange={e => setData({...data, personalDetails: {...data.personalDetails, email: e.target.value}})} />
                   <input type="text" placeholder="Phone Number" className="border p-3 rounded" value={data.personalDetails.phone} onChange={e => setData({...data, personalDetails: {...data.personalDetails, phone: e.target.value}})} />
                   <input type="text" placeholder="LinkedIn URL" className="border p-3 rounded" value={data.personalDetails.linkedin} onChange={e => setData({...data, personalDetails: {...data.personalDetails, linkedin: e.target.value}})} />
+                  <input type="text" placeholder="Address" className="border p-3 rounded col-span-1 md:col-span-2" value={data.personalDetails.address} onChange={e => setData({...data, personalDetails: {...data.personalDetails, address: e.target.value}})} />
+                  <input type="text" placeholder="Photo URL" className="border p-3 rounded" value={data.personalDetails.photo} onChange={e => setData({...data, personalDetails: {...data.personalDetails, photo: e.target.value}})} />
                 </div>
+                <textarea placeholder="Profile Summary" rows={3} className="border p-3 rounded w-full" value={data.personalDetails.profileSummary} onChange={e => setData({...data, personalDetails: {...data.personalDetails, profileSummary: e.target.value}})} />
 
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center mb-2">
@@ -222,6 +229,34 @@ const ResumeBuilder: React.FC = () => {
                       <input type="text" placeholder="Company" className="border p-2 rounded text-sm" value={exp.company} onChange={e => { const newExp = [...data.experience]; newExp[idx].company = e.target.value; setData({...data, experience: newExp}) }} />
                       <input type="text" placeholder="Duration (e.g. 2020-2022)" className="border p-2 rounded text-sm col-span-2 md:col-span-1" value={exp.duration} onChange={e => { const newExp = [...data.experience]; newExp[idx].duration = e.target.value; setData({...data, experience: newExp}) }} />
                       <input type="text" placeholder="Short description" className="border p-2 rounded text-sm col-span-2 md:col-span-1" value={exp.description} onChange={e => { const newExp = [...data.experience]; newExp[idx].description = e.target.value; setData({...data, experience: newExp}) }} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t pt-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-semibold text-lg">Projects</h3>
+                    <button onClick={addProject} className="text-sm text-blue-600 font-medium">+ Add</button>
+                  </div>
+                  {data.projects.map((proj, idx) => (
+                    <div key={idx} className="grid grid-cols-2 gap-2 mb-2">
+                      <input type="text" placeholder="Project Title" className="border p-2 rounded text-sm" value={proj.title} onChange={e => { const newProj = [...data.projects]; newProj[idx].title = e.target.value; setData({...data, projects: newProj}) }} />
+                      <input type="text" placeholder="Project Link" className="border p-2 rounded text-sm" value={proj.link} onChange={e => { const newProj = [...data.projects]; newProj[idx].link = e.target.value; setData({...data, projects: newProj}) }} />
+                      <input type="text" placeholder="Description" className="border p-2 rounded text-sm col-span-2" value={proj.description} onChange={e => { const newProj = [...data.projects]; newProj[idx].description = e.target.value; setData({...data, projects: newProj}) }} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t pt-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-semibold text-lg">Certifications</h3>
+                    <button onClick={addCertification} className="text-sm text-blue-600 font-medium">+ Add</button>
+                  </div>
+                  {data.certifications.map((cert, idx) => (
+                    <div key={idx} className="grid grid-cols-3 gap-2 mb-2">
+                      <input type="text" placeholder="Certification Name" className="border p-2 rounded text-sm" value={cert.name} onChange={e => { const newCert = [...data.certifications]; newCert[idx].name = e.target.value; setData({...data, certifications: newCert}) }} />
+                      <input type="text" placeholder="Issuer" className="border p-2 rounded text-sm" value={cert.issuer} onChange={e => { const newCert = [...data.certifications]; newCert[idx].issuer = e.target.value; setData({...data, certifications: newCert}) }} />
+                      <input type="text" placeholder="Year" className="border p-2 rounded text-sm" value={cert.year} onChange={e => { const newCert = [...data.certifications]; newCert[idx].year = e.target.value; setData({...data, certifications: newCert}) }} />
                     </div>
                   ))}
                 </div>

@@ -6,11 +6,16 @@ const ResumeSchema = new mongoose.Schema({
     fullName: String,
     email: String,
     phone: String,
-    linkedin: String
+    address: String, // ADDED
+    linkedin: String,
+    photo: String, // ADDED
+    profileSummary: String // ADDED
   },
   education: [{ degree: String, institution: String, year: String }],
   experience: [{ title: String, company: String, duration: String, description: String }],
   skills: [String],
+  projects: [{ title: String, description: String, link: String }], // ADDED
+  certifications: [{ name: String, issuer: String, year: String }], // ADDED
   
   // Storage
   resumeUrl: String,

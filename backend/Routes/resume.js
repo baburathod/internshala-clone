@@ -14,7 +14,7 @@ const razorpay = new Razorpay({
 // 1. Save Draft & Send OTP
 router.post("/draft", async (req, res) => {
   try {
-    const { uid, personalDetails, education, experience, skills } = req.body;
+    const { uid, personalDetails, education, experience, skills, projects, certifications } = req.body;
     const user = await User.findOne({ uid });
     if (!user) return res.status(404).json({ error: "User not found" });
 
@@ -28,6 +28,8 @@ router.post("/draft", async (req, res) => {
       education,
       experience,
       skills,
+      projects,
+      certifications,
       otp: { code: otpCode, expiresAt },
       otpAttempts: 0
     });
