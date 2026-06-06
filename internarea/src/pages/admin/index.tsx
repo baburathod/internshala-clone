@@ -23,7 +23,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/admin/adminlogin`, { username, password });
+      const res = await axios.post(`${API_BASE_URL}/api/admin/adminlogin`, { username, password });
       if (res.data.token) {
         setIsAuthenticated(true);
         toast.success("Admin Login Successful");
@@ -39,12 +39,12 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       const [analyticsRes, usersRes, jobsRes, internshipsRes, postsRes, subsRes] = await Promise.all([
-        axios.get(`${API_BASE_URL}/admin/analytics`),
-        axios.get(`${API_BASE_URL}/admin/users`),
-        axios.get(`${API_BASE_URL}/admin/jobs`),
-        axios.get(`${API_BASE_URL}/admin/internships`),
-        axios.get(`${API_BASE_URL}/admin/posts`),
-        axios.get(`${API_BASE_URL}/admin/subscriptions`),
+        axios.get(`/api/admin/analytics`),
+        axios.get(`/api/admin/users`),
+        axios.get(`/api/admin/jobs`),
+        axios.get(`/api/admin/internships`),
+        axios.get(`/api/admin/posts`),
+        axios.get(`/api/admin/subscriptions`),
       ]);
       setAnalytics(analyticsRes.data);
       setUsers(usersRes.data);
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
   const handleDelete = async (type: string, id: string) => {
     if (!window.confirm("Are you sure you want to delete this record?")) return;
     try {
-      await axios.delete(`${API_BASE_URL}/admin/${type}/${id}`);
+      await axios.delete(`/api/admin/${type}/${id}`);
       toast.success("Record deleted");
       fetchData(); // Refresh data
     } catch (error) {

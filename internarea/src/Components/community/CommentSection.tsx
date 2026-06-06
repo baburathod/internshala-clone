@@ -28,7 +28,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ postId, comments, onCom
 
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/posts/${postId}/comment`, {
+      await axios.post(`${API_BASE_URL}/api/posts/${postId}/comment`, {
         uid: user.uid,
         text
       });

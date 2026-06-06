@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     setMessage(null);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/password/reset`, { identifier });
+      const res = await axios.post(`${API_BASE_URL}/api/password/reset`, { identifier });
       setMessage({ type: 'success', text: "A temporary password has been sent." });
       toast.success("A temporary password has been sent.");
       setIdentifier("");

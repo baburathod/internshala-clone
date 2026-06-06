@@ -15,7 +15,7 @@ const Community: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
 
   const fetchPosts = () => {
-    axios.get(`${API_BASE_URL}/posts`)
+    axios.get(`${API_BASE_URL}/api/posts`)
       .then(res => setPosts(res.data))
       .catch(err => console.error("Error fetching posts", err));
   };

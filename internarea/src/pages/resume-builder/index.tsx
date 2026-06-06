@@ -44,7 +44,7 @@ const ResumeBuilder: React.FC = () => {
     }
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/resume/draft`, {
+      const res = await axios.post(`${API_BASE_URL}/api/resume/draft`, {
         uid: user.uid,
         ...data
       });
@@ -67,7 +67,7 @@ const ResumeBuilder: React.FC = () => {
     if (!otp) return toast.error("Enter OTP");
     setLoading(true);
     try {
-      await axios.post(`${API_BASE_URL}/resume/verify-otp`, { resumeId, otpCode: otp });
+      await axios.post(`${API_BASE_URL}/api/resume/verify-otp`, { resumeId, otpCode: otp });
       toast.success("Email verified successfully");
       setStep(3);
     } catch (error: any) {
@@ -81,7 +81,7 @@ const ResumeBuilder: React.FC = () => {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const { data: orderData } = await axios.post(`${API_BASE_URL}/resume/create-order`, { resumeId });
+      const { data: orderData } = await axios.post(`${API_BASE_URL}/api/resume/create-order`, { resumeId });
       
       const options = {
         key: orderData.key_id,
@@ -92,7 +92,7 @@ const ResumeBuilder: React.FC = () => {
         order_id: orderData.order.id,
         handler: async function (response: any) {
           try {
-            await axios.post(`${API_BASE_URL}/resume/verify-payment`, {
+            await axios.post(`${API_BASE_URL}/api/resume/verify-payment`, {
               ...response,
               resumeId
             });
@@ -156,7 +156,7 @@ const ResumeBuilder: React.FC = () => {
       }
 
       // 3. Attach to Profile
-      await axios.put(`${API_BASE_URL}/resume/attach`, { resumeId, resumeUrl: secureUrl });
+      await axios.put(`${API_BASE_URL}/api/resume/attach`, { resumeId, resumeUrl: secureUrl });
       toast.success("Resume saved to your profile!");
     } catch (error) {
       console.error(error);

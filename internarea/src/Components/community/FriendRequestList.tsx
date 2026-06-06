@@ -12,7 +12,7 @@ const FriendRequestList: React.FC = () => {
 
   const fetchRequests = () => {
     if (user) {
-      axios.get(`${API_BASE_URL}/friends/requests/${user.uid}`)
+      axios.get(`${API_BASE_URL}/api/friends/requests/${user.uid}`)
         .then(res => setRequests(res.data))
         .catch(err => console.error(err));
     }
@@ -24,7 +24,7 @@ const FriendRequestList: React.FC = () => {
 
   const handleAction = async (requestId: string, action: 'accept' | 'reject') => {
     try {
-      await axios.put(`${API_BASE_URL}/friends/${action}`, { requestId });
+      await axios.put(`${API_BASE_URL}/api/friends/${action}`, { requestId });
       toast.success(`Request ${action}ed`);
       fetchRequests();
     } catch (error) {

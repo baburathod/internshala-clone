@@ -11,7 +11,7 @@ const FriendSidebar: React.FC = () => {
   useEffect(() => {
     if (user) {
       // Fetch user details from DB to get friends array length
-      axios.post(`${API_BASE_URL}/users/sync`, { uid: user.uid })
+      axios.post(`${API_BASE_URL}/api/users/sync`, { uid: user.uid })
         .then(res => setFriendCount(res.data.friends?.length || 0))
         .catch(err => console.error(err));
     }

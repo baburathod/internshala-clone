@@ -57,7 +57,7 @@ const Navbar = () => {
       }
       try {
         toast.info("Requesting French activation OTP...");
-        await axios.post(`${API_BASE_URL}/language/request-french`, { uid: user.uid });
+        await axios.post(`${API_BASE_URL}/api/language/request-french`, { uid: user.uid });
         setShowFrenchOtp(true);
       } catch (err) {
         toast.error("Failed to request OTP.");
@@ -72,7 +72,7 @@ const Navbar = () => {
     if (!user) return;
     setVerifyingFrench(true);
     try {
-      await axios.post(`${API_BASE_URL}/language/verify-french`, { uid: user.uid, otpCode: frenchOtp });
+      await axios.post(`${API_BASE_URL}/api/language/verify-french`, { uid: user.uid, otpCode: frenchOtp });
       i18n.changeLanguage('fr');
       toast.success("French activated successfully!");
       setShowFrenchOtp(false);

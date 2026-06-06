@@ -21,7 +21,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
   const handleLike = async () => {
     if (!user) return toast.error("Please login to like");
     try {
-      await axios.put(`${API_BASE_URL}/posts/${post._id}/like`, { uid: user.uid });
+      await axios.put(`${API_BASE_URL}/api/posts/${post._id}/like`, { uid: user.uid });
       onPostUpdated();
     } catch (error) {
       console.error("Error liking post", error);
@@ -34,7 +34,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onPostUpdated }) => {
     
     if (user) {
       try {
-        await axios.post(`${API_BASE_URL}/posts/${post._id}/share`, { uid: user.uid });
+        await axios.post(`${API_BASE_URL}/api/posts/${post._id}/share`, { uid: user.uid });
         onPostUpdated();
       } catch (error) {
         console.error("Error recording share", error);

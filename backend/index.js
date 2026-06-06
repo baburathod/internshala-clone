@@ -27,6 +27,8 @@ app.use("/api/password", passwordRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 app.use("/api/auth", authRoutes);
+const adminRoutes = require("./Routes/admin");
+app.use("/api/admin", adminRoutes);
 app.use("/api/language", languageRoutes);
 connect();
 app.use((req, res, next) => {

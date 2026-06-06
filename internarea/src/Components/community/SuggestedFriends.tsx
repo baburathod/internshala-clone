@@ -13,7 +13,7 @@ const SuggestedFriends: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get(`${API_BASE_URL}/users/search?q=`)
+      axios.get(`${API_BASE_URL}/api/users/search?q=`)
         .then(res => {
           // Filter out current user from suggestions
           const filtered = res.data.filter((u: any) => u.uid !== user.uid);
@@ -25,7 +25,7 @@ const SuggestedFriends: React.FC = () => {
 
   const sendRequest = async (receiverId: string) => {
     try {
-      await axios.post(`${API_BASE_URL}/friends/request`, {
+      await axios.post(`${API_BASE_URL}/api/friends/request`, {
         senderUid: user.uid,
         receiverId
       });

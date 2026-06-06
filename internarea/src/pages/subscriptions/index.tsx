@@ -60,7 +60,7 @@ const Subscriptions: React.FC = () => {
 
     // Fetch user plan details (simulating by querying sync or assuming user has it)
     if (user) {
-      axios.post(`${API_BASE_URL}/users/sync`, { uid: user.uid, name: user.name, email: user.email, photo: user.photo })
+      axios.post(`${API_BASE_URL}/api/users/sync`, { uid: user.uid, name: user.name, email: user.email, photo: user.photo })
         .then(res => {
           setCurrentPlan(res.data.subscriptionPlan || 'Free');
           setAppsUsed(res.data.applicationsUsedThisMonth || 0);
@@ -76,7 +76,7 @@ const Subscriptions: React.FC = () => {
 
     setLoading(true);
     try {
-      const { data: orderData } = await axios.post(`${API_BASE_URL}/subscription/create-order`, { 
+      const { data: orderData } = await axios.post(`${API_BASE_URL}/api/subscription/create-order`, { 
         uid: user.uid, 
         plan: planName 
       });
@@ -90,7 +90,7 @@ const Subscriptions: React.FC = () => {
         order_id: orderData.order.id,
         handler: async function (response: any) {
           try {
-            const verifyRes = await axios.post(`${API_BASE_URL}/subscription/verify-payment`, {
+            const verifyRes = await axios.post(`${API_BASE_URL}/api/subscription/verify-payment`, {
               ...response,
               uid: user.uid
             });

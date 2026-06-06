@@ -47,7 +47,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
     }
 
     try {
-      await axios.post(`${API_BASE_URL}/posts`, {
+      await axios.post(`${API_BASE_URL}/api/posts`, {
         uid: user.uid,
         text,
         image: imageUrl,

@@ -18,7 +18,7 @@ export default function Footer() {
           <FooterSection title="About us" items={[{name:"Startups", href:"/startups"}, {name:"Enterprise", href:"/enterprise"}]} links />
           <FooterSection title="Team diary" items={[{name:"Blog", href:"/blog"}]} links />
           <FooterSection title="Legal" items={[{name:"Terms and conditions", href:"/terms"}, {name:"Privacy Policy", href:"/privacy-policy"}]} links />
-          <FooterSection title="Sitemap" items={[{name:"Sitemap", href:"/"}]} links />
+          <FooterSection title="Sitemap" items={[{name:"Sitemap", href:"/sitemap"}]} links />
         </div>
 
         <div className="mt-10 flex flex-col sm:flex-row justify-between items-center">
