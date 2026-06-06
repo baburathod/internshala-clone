@@ -139,31 +139,21 @@ const Navbar = () => {
             </div>
             {/* Navigation Links */}
             <div className="hidden md:flex items-center space-x-2 lg:space-x-6">
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
-                <Link href={"/internship"}>
-                  <span>{t('navbar.internships')}</span>
-                </Link>
-              </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
-                <Link href={"/job"}>
-                  <span>{t('navbar.jobs')}</span>
-                </Link>
-              </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
-                <Link href={"/community"}>
-                  <span>{t('navbar.community')}</span>
-                </Link>
-              </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
-                <Link href={"/subscriptions"}>
-                  <span>{t('navbar.subscriptions')}</span>
-                </Link>
-              </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
-                <Link href={"/resume-builder"}>
-                  <span>Resume Builder</span>
-                </Link>
-              </button>
+              <Link href={"/internship"} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap cursor-pointer">
+                <span>{t('navbar.internships')}</span>
+              </Link>
+              <Link href={"/job"} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap cursor-pointer">
+                <span>{t('navbar.jobs')}</span>
+              </Link>
+              <Link href={"/community"} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap cursor-pointer">
+                <span>{t('navbar.community')}</span>
+              </Link>
+              <Link href={"/subscriptions"} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap cursor-pointer">
+                <span>{t('navbar.subscriptions')}</span>
+              </Link>
+              <Link href={"/resume-builder"} className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap cursor-pointer">
+                <span>Resume Builder</span>
+              </Link>
               <div className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-2 flex-shrink-0">
                 <Search size={16} className="text-gray-400" />
                 <input
@@ -209,12 +199,13 @@ const Navbar = () => {
                   <button 
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                     className="text-gray-600 hover:text-blue-600 focus:outline-none"
+                    aria-label="Toggle Theme"
                   >
                     {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
                   </button>
 
                   {/* Messages Icon */}
-                  <Link href="/messages" className="text-gray-600 hover:text-blue-600 focus:outline-none relative">
+                  <Link href="/messages" className="text-gray-600 hover:text-blue-600 focus:outline-none relative" aria-label="Messages">
                     <MessageSquare size={24} />
                   </Link>
 
@@ -223,6 +214,7 @@ const Navbar = () => {
                     <button 
                       onClick={() => setShowNotifications(!showNotifications)}
                       className="text-gray-600 hover:text-blue-600 focus:outline-none relative"
+                      aria-label="Notifications"
                     >
                       <Bell size={24} />
                       {notifications.filter(n => !n.isRead).length > 0 && (
