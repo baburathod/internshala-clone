@@ -10,9 +10,13 @@ export default function Footer() {
             {name:"New York", href:"/internships/new-york"}, 
             {name:"Los Angeles", href:"/internships/los-angeles"}, 
             {name:"Chicago", href:"/internships/chicago"}, 
-            {name:"San Francisco", href:"/internships/san-francisco"}, 
-            {name:"Miami", href:"/internships/miami"}, 
-            {name:"Seattle", href:"/internships/seattle"}
+            {name:"Houston", href:"/internships/houston"}, 
+            {name:"Phoenix", href:"/internships/phoenix"}, 
+            {name:"Philadelphia", href:"/internships/philadelphia"},
+            {name:"San Antonio", href:"/internships/san-antonio"},
+            {name:"San Diego", href:"/internships/san-diego"},
+            {name:"Dallas", href:"/internships/dallas"},
+            {name:"San Jose", href:"/internships/san-jose"}
           ]} links />
           <FooterSection title="Company" items={[
             {name:"About us", href:"/about"}, 

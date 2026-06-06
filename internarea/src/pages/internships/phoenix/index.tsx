@@ -4,13 +4,13 @@ import Head from 'next/head';
 import Navbar from '@/Components/Navbar';
 import Footer from '@/Components/Fotter';
 
-export default function newsPage() {
+export default function internshipsphoenixPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Head>
-        <title>News | Intern Area - Real World Internships</title>
-        <meta name="description" content="Stay updated with the latest from Intern Area.. Find out more about our mission, hiring, and salaries." />
-        <meta name="keywords" content="News, jobs, internships, careers, Intern Area" />
+        <title>Internships in Phoenix | Intern Area - Real World Internships</title>
+        <meta name="description" content="Growing tech hub opportunities.. Find out more about our mission, hiring, and salaries." />
+        <meta name="keywords" content="Internships in Phoenix, jobs, internships, careers, Intern Area" />
       </Head>
 
       <Navbar />
@@ -19,9 +19,9 @@ export default function newsPage() {
         {/* Hero Section */}
         <section className="bg-blue-600 text-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{t("News") || "News"}</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{t("Internships in Phoenix") || "Internships in Phoenix"}</h1>
             <p className="text-xl md:text-2xl font-light text-blue-100 max-w-3xl mx-auto">
-              Stay updated with the latest from Intern Area.
+              Growing tech hub opportunities.
             </p>
           </div>
         </section>
@@ -32,7 +32,7 @@ export default function newsPage() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Business Purpose</h2>
               <p className="text-gray-700 text-lg mb-4">
-                At Intern Area, our mission is to build the ultimate bridge between ambitious talent and industry-leading organizations. Stay updated with the latest from Intern Area. We believe in creating transparent, scalable, and equitable hiring ecosystems.
+                At Intern Area, our mission is to build the ultimate bridge between ambitious talent and industry-leading organizations. Growing tech hub opportunities. We believe in creating transparent, scalable, and equitable hiring ecosystems.
               </p>
               
               <h2 className="text-3xl font-bold text-gray-900 mt-10 mb-6">Career Resources</h2>
@@ -47,15 +47,15 @@ export default function newsPage() {
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Hiring Information</h3>
               <div className="mb-6">
                 <p className="font-semibold text-gray-800">Current Openings:</p>
-                <p className="text-gray-600">Hiring content writers.</p>
+                <p className="text-gray-600">Local recruiters wanted.</p>
               </div>
               <div className="mb-6">
                 <p className="font-semibold text-gray-800">Compensation & Salary:</p>
-                <p className="text-gray-600">Competitive rates. Equity, health benefits, and 401(k) matching included.</p>
+                <p className="text-gray-600">$85k - $115k annually. Equity, health benefits, and 401(k) matching included.</p>
               </div>
               
               <button className="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition">
-                Subscribe to Newsletter
+                View Phoenix Jobs
               </button>
             </div>
           </div>
@@ -72,7 +72,7 @@ export default function newsPage() {
               </div>
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">Are the salaries accurate?</h4>
-                <p className="text-gray-600">Yes, we enforce strict transparency rules. The compensation listed (Competitive rates.) is fully verified.</p>
+                <p className="text-gray-600">Yes, we enforce strict transparency rules. The compensation listed ($85k - $115k annually.) is fully verified.</p>
               </div>
             </div>
           </div>
