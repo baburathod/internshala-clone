@@ -42,6 +42,14 @@ const Community: React.FC = () => {
             <div className="col-span-1 md:col-span-6">
               <CreatePost onPostCreated={fetchPosts} />
               
+              <div className="flex justify-between items-center mb-4 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                <h2 className="font-semibold text-gray-800">Your Feed</h2>
+                <div className="flex space-x-2">
+                  <button className="px-3 py-1 text-sm bg-blue-50 text-blue-600 font-medium rounded-full">Recent</button>
+                  <button className="px-3 py-1 text-sm text-gray-500 hover:bg-gray-50 font-medium rounded-full">Trending 🔥</button>
+                </div>
+              </div>
+
               <div className="space-y-6">
                 {posts.map(post => (
                   <PostCard key={post._id} post={post} onPostUpdated={fetchPosts} />

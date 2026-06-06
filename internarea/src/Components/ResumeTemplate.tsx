@@ -7,6 +7,7 @@ export interface ResumeData {
   skills: string[];
   projects: { title: string; description: string; link: string }[];
   certifications: { name: string; issuer: string; year: string }[];
+  template?: string; // 'modern', 'corporate', 'ats'
 }
 
 interface ResumeTemplateProps {
@@ -14,15 +15,22 @@ interface ResumeTemplateProps {
 }
 
 const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
+  const tpl = data.template || 'modern';
+  
+  const fontClass = tpl === 'corporate' ? 'font-serif' : 'font-sans';
+  const headerClass = tpl === 'corporate' ? 'border-b-4 border-gray-800' : tpl === 'ats' ? 'border-b border-black' : 'border-b-2 border-blue-600';
+  const nameClass = tpl === 'corporate' ? 'text-gray-900 uppercase tracking-widest' : tpl === 'ats' ? 'text-black' : 'text-blue-600 uppercase';
+  const titleClass = tpl === 'corporate' ? 'text-gray-800 uppercase tracking-wider' : tpl === 'ats' ? 'text-black font-bold uppercase' : 'text-blue-600 uppercase border-blue-200';
+
   return (
-    <div id="resume-template" className="bg-white text-black p-10 w-[800px] mx-auto font-sans" style={{ minHeight: '1120px' }}>
+    <div id="resume-template" className={`bg-white text-black p-10 w-[800px] mx-auto ${fontClass}`} style={{ minHeight: '1120px' }}>
       {/* Header */}
-      <div className="flex items-center border-b-2 border-gray-800 pb-4 mb-6">
-        {data.personalDetails.photo && (
+      <div className={`flex items-center pb-4 mb-6 ${headerClass}`}>
+        {data.personalDetails.photo && tpl !== 'ats' && (
           <img src={data.personalDetails.photo} alt="Profile" className="w-24 h-24 rounded-full mr-6 object-cover border-2 border-gray-300" />
         )}
-        <div className="flex-1">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2 uppercase">{data.personalDetails.fullName || "Your Name"}</h1>
+        <div className="flex-1 text-center md:text-left">
+          <h1 className={`text-4xl font-bold mb-2 ${nameClass}`}>{data.personalDetails.fullName || "Your Name"}</h1>
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600">
             {data.personalDetails.email && <span>{data.personalDetails.email}</span>}
             {data.personalDetails.phone && <span>• {data.personalDetails.phone}</span>}
@@ -35,14 +43,14 @@ const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
       {/* Profile Summary */}
       {data.personalDetails.profileSummary && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-2">Profile Summary</h2>
+          <h2 className={`text-xl font-bold border-b pb-1 mb-2 ${titleClass}`}>Profile Summary</h2>
           <p className="text-sm text-gray-700">{data.personalDetails.profileSummary}</p>
         </div>
       )}
 
       {/* Experience */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-4">Experience</h2>
+        <h2 className={`text-xl font-bold border-b pb-1 mb-4 ${titleClass}`}>Experience</h2>
         {data.experience.length > 0 ? data.experience.map((exp, idx) => (
           <div key={idx} className="mb-4">
             <div className="flex justify-between items-baseline mb-1">
@@ -59,7 +67,7 @@ const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
 
       {/* Education */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-4">Education</h2>
+        <h2 className={`text-xl font-bold border-b pb-1 mb-4 ${titleClass}`}>Education</h2>
         {data.education.length > 0 ? data.education.map((edu, idx) => (
           <div key={idx} className="mb-3">
             <div className="flex justify-between items-baseline mb-1">
@@ -76,7 +84,7 @@ const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
       {/* Projects */}
       {data.projects && data.projects.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-4">Projects</h2>
+          <h2 className={`text-xl font-bold border-b pb-1 mb-4 ${titleClass}`}>Projects</h2>
           {data.projects.map((proj, idx) => (
             <div key={idx} className="mb-3">
               <div className="flex justify-between items-baseline mb-1">
@@ -92,7 +100,7 @@ const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
       {/* Certifications */}
       {data.certifications && data.certifications.length > 0 && (
         <div className="mb-6">
-          <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-4">Certifications</h2>
+          <h2 className={`text-xl font-bold border-b pb-1 mb-4 ${titleClass}`}>Certifications</h2>
           {data.certifications.map((cert, idx) => (
             <div key={idx} className="mb-2 flex justify-between items-baseline">
               <div>
@@ -107,7 +115,7 @@ const ResumeTemplate: React.FC<ResumeTemplateProps> = ({ data }) => {
 
       {/* Skills */}
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-gray-800 uppercase border-b border-gray-300 pb-1 mb-4">Skills</h2>
+        <h2 className={`text-xl font-bold border-b pb-1 mb-4 ${titleClass}`}>Skills</h2>
         {data.skills.length > 0 ? (
           <div className="flex flex-wrap gap-2">
             {data.skills.map((skill, idx) => (

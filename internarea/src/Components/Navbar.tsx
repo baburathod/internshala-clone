@@ -271,6 +271,9 @@ const Navbar = () => {
                     )}
                   </div>
 
+                  <Link href={"/security"} className="text-gray-700 hover:text-blue-600 font-medium transition">
+                    Security
+                  </Link>
                   <Link href={"/profile"}>
                     <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
                   </Link>

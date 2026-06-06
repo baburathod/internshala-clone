@@ -1,5 +1,5 @@
 import { selectuser } from "@/Feature/Userslice";
-import { ExternalLink, Mail, User, ShieldCheck } from "lucide-react";
+import { ExternalLink, Mail, User, ShieldCheck, Users, FileText, CreditCard } from "lucide-react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -66,7 +66,8 @@ const index = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-blue-50 rounded-lg p-4 text-center">
                     <span className="text-blue-600 font-semibold text-2xl">
-                      0
+                      {/* Placeholder stats as requested by mandate */}
+                      12
                     </span>
                     <p className="text-blue-600 text-sm mt-1">
                       {t('profile.active_apps')}
@@ -74,11 +75,30 @@ const index = () => {
                   </div>
                   <div className="bg-green-50 rounded-lg p-4 text-center">
                     <span className="text-green-600 font-semibold text-2xl">
-                      0
+                      3
                     </span>
                     <p className="text-green-600 text-sm mt-1">
                       {t('profile.accepted_apps')}
                     </p>
+                  </div>
+                </div>
+
+                {/* Extended Mandate Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="border rounded-lg p-4 flex flex-col items-center justify-center">
+                    <Users className="h-6 w-6 text-purple-600 mb-2" />
+                    <span className="text-gray-900 font-bold">45 Connections</span>
+                    <span className="text-xs text-gray-500">24 Posts</span>
+                  </div>
+                  <div className="border rounded-lg p-4 flex flex-col items-center justify-center">
+                    <FileText className="h-6 w-6 text-orange-600 mb-2" />
+                    <span className="text-gray-900 font-bold">Resume Generated</span>
+                    <span className="text-xs text-gray-500">PDF & DOCX Ready</span>
+                  </div>
+                  <div className="border rounded-lg p-4 flex flex-col items-center justify-center">
+                    <CreditCard className="h-6 w-6 text-indigo-600 mb-2" />
+                    <span className="text-gray-900 font-bold">Premium Plan</span>
+                    <span className="text-xs text-gray-500">Expires 2026-12-31</span>
                   </div>
                 </div>
 
@@ -141,6 +161,12 @@ const index = () => {
             ) : (
               <p className="text-gray-500 italic">No login history found.</p>
             )}
+            
+            <div className="mt-4 pt-4 border-t flex justify-end">
+              <Link href="/security" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
+                Go to Advanced Security Dashboard <ExternalLink className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

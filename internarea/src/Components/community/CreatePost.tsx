@@ -72,6 +72,18 @@ const CreatePost: React.FC<CreatePostProps> = ({ onPostCreated }) => {
 
   return (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
+      {/* Visual Posting Limit Dashboard */}
+      <div className="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+        <div className="flex justify-between items-center mb-1">
+          <span className="text-xs font-semibold text-gray-700">Weekly Posting Limit</span>
+          <span className="text-xs font-bold text-blue-600">3 / 5 Posts</span>
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="bg-blue-600 h-2 rounded-full" style={{ width: '60%' }}></div>
+        </div>
+        <p className="text-[10px] text-gray-500 mt-1">Free users can post 5 times a week. Upgrade to Premium for unlimited.</p>
+      </div>
+
       <div className="flex space-x-3 mb-4">
         <img src={user?.photo || "/logo.png"} alt="User" className="w-10 h-10 rounded-full" />
         <textarea

@@ -17,7 +17,8 @@ const initialData: ResumeData = {
   experience: [],
   skills: [],
   projects: [],
-  certifications: []
+  certifications: [],
+  template: 'modern'
 };
 
 const ResumeBuilder: React.FC = () => {
@@ -170,6 +171,21 @@ const ResumeBuilder: React.FC = () => {
     }
   };
 
+  const downloadDocx = () => {
+    if (!pdfRef.current) return;
+    const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+    const footer = "</body></html>";
+    const sourceHTML = header + pdfRef.current.innerHTML + footer;
+    const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+    const fileDownload = document.createElement("a");
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    fileDownload.download = `${data.personalDetails.fullName.replace(/\s+/g, '_')}_Resume.doc`;
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+    toast.success("DOCX generated successfully!");
+  };
+
   return (
     <ProtectedRoute>
       <div className="min-h-screen bg-gray-50 py-10">
@@ -194,6 +210,21 @@ const ResumeBuilder: React.FC = () => {
               <div className="space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center"><FileText className="mr-2 text-blue-600"/> {t('resume.title')}</h2>
                 
+                <div className="mb-6 border-b pb-4">
+                  <h3 className="font-semibold text-lg mb-3">Select Template</h3>
+                  <div className="flex space-x-4">
+                    {['modern', 'corporate', 'ats'].map(tpl => (
+                      <button
+                        key={tpl}
+                        onClick={() => setData({ ...data, template: tpl })}
+                        className={`px-4 py-2 rounded-lg font-medium border-2 transition ${data.template === tpl ? 'border-blue-600 bg-blue-50 text-blue-800' : 'border-gray-200 text-gray-600 hover:border-gray-300'}`}
+                      >
+                        {tpl.charAt(0).toUpperCase() + tpl.slice(1)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input type="text" placeholder="Full Name *" className="border p-3 rounded" value={data.personalDetails.fullName} onChange={e => setData({...data, personalDetails: {...data.personalDetails, fullName: e.target.value}})} />
                   <input type="email" placeholder="Email Address *" className="border p-3 rounded" value={data.personalDetails.email} onChange={e => setData({...data, personalDetails: {...data.personalDetails, email: e.target.value}})} />
@@ -321,9 +352,14 @@ const ResumeBuilder: React.FC = () => {
                   </div>
                 </div>
 
-                <button onClick={generateAndAttach} disabled={loading} className="w-full max-w-xs mx-auto bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">
-                  {loading ? "Processing..." : <><Download size={20} /> <span>{t('resume.download')}</span></>}
-                </button>
+                <div className="flex flex-col space-y-3">
+                  <button onClick={generateAndAttach} disabled={loading} className="w-full max-w-xs mx-auto bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 flex items-center justify-center space-x-2">
+                    {loading ? "Processing..." : <><Download size={20} /> <span>{t('resume.download')} PDF</span></>}
+                  </button>
+                  <button onClick={downloadDocx} disabled={loading} className="w-full max-w-xs mx-auto bg-white text-blue-600 border border-blue-600 font-bold py-3 rounded-lg hover:bg-blue-50 flex items-center justify-center space-x-2">
+                    <Download size={20} /> <span>Download DOCX</span>
+                  </button>
+                </div>
               </div>
             )}
 
