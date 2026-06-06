@@ -28,8 +28,10 @@ const Navbar = () => {
   
   const [notifications, setNotifications] = useState<any[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     if (user) {
       fetchNotifications();
     }
@@ -159,6 +161,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search..."
+                  aria-label="Search"
                   className="ml-2 bg-transparent focus:outline-none text-sm w-32 xl:w-48"
                 />
               </div>
@@ -170,6 +173,7 @@ const Navbar = () => {
               <div className="relative">
                 <button 
                   onClick={() => setShowLangMenu(!showLangMenu)}
+                  aria-label="Change Language"
                   className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap"
                 >
                   <Globe size={20} />
@@ -198,10 +202,10 @@ const Navbar = () => {
                   {/* Theme Toggle */}
                   <button 
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="text-gray-600 hover:text-blue-600 focus:outline-none"
+                    className="text-gray-600 hover:text-blue-600 focus:outline-none w-6 h-6 flex items-center justify-center"
                     aria-label="Toggle Theme"
                   >
-                    {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+                    {mounted ? (theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />) : <div className="w-6 h-6"></div>}
                   </button>
 
                   {/* Messages Icon */}
