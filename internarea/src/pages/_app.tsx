@@ -2,6 +2,7 @@ import Footer from "@/Components/Fotter";
 import Navbar from "@/Components/Navbar";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { store } from "../store/store";
 import { Provider, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
