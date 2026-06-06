@@ -2,16 +2,13 @@ const express = require("express");
 const router = express.Router();
 const application = require("../Model/Application");
 const User = require("../Model/User");
+const requireAuth = require("../middleware/requireAuth");
 
 // Middleware to enforce subscription limits
 const enforceSubscriptionLimits = async (req, res, next) => {
   try {
-    const uid = req.body.user?.uid;
-    if (!uid) {
-      return res.status(400).json({ error: "User UID is required for application" });
-    }
-
-    const user = await User.findOne({ uid });
+    // req.user is now populated by requireAuth middleware
+    const user = req.user;
     if (!user) return res.status(404).json({ error: "User not found" });
 
     // Check plan expiration
@@ -55,7 +52,7 @@ const enforceSubscriptionLimits = async (req, res, next) => {
   }
 };
 
-router.post("/", enforceSubscriptionLimits, async (req, res) => {
+router.post("/", requireAuth, enforceSubscriptionLimits, async (req, res) => {
   const applicationipdata = new application({
     company: req.body.company,
     category: req.body.category,
