@@ -6,29 +6,29 @@ const Page = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Head>
-        <title>Terms & Conditions - Internshala Clone</title>
-        <meta name="description" content="User Rules, Employer Rules, and Liability Disclaimer." />
+        <title>Customer Support - Internshala Clone</title>
+        <meta name="description" content="Ticket System, Live Chat, and System Status." />
       </Head>
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-4 text-center">
-        <h1 className="text-4xl font-extrabold mb-4">Terms & Conditions</h1>
-        <p className="text-xl max-w-2xl mx-auto">User Rules, Employer Rules, and Liability Disclaimer.</p>
+        <h1 className="text-4xl font-extrabold mb-4">Customer Support</h1>
+        <p className="text-xl max-w-2xl mx-auto">Ticket System, Live Chat, and System Status.</p>
       </div>
 
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto w-full px-4 py-4 text-sm text-gray-500">
-        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">Terms & Conditions</span>
+        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">Customer Support</span>
       </div>
 
       {/* Main Content */}
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-white rounded-xl shadow p-8 text-gray-800 leading-relaxed">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Overview</h2>
-          <p className="mb-8">User Rules, Employer Rules, and Liability Disclaimer.</p>
+          <p className="mb-8">Ticket System, Live Chat, and System Status.</p>
           
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Details</h2>
-          <p className="mb-6 font-medium text-lg">Last updated: June 2026. By using this service you agree to our strict rules.</p>
+          <p className="mb-6 font-medium text-lg">All systems operational. Live chat available 9AM-5PM.</p>
           
           
 
