@@ -7,35 +7,31 @@ const Page = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Head>
-        <title>${data.title} - Internshala Clone</title>
-        <meta name="description" content="${data.desc}" />
+        <title>Hiring for Startups - Internshala Clone</title>
+        <meta name="description" content="Find hungry talent to scale your startup." />
       </Head>
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-4 text-center">
-        <h1 className="text-4xl font-extrabold mb-4">${data.title}</h1>
-        <p className="text-xl max-w-2xl mx-auto">${data.desc}</p>
+        <h1 className="text-4xl font-extrabold mb-4">Hiring for Startups</h1>
+        <p className="text-xl max-w-2xl mx-auto">Find hungry talent to scale your startup.</p>
       </div>
 
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto w-full px-4 py-4 text-sm text-gray-500">
-        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">${data.title}</span>
+        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">Hiring for Startups</span>
       </div>
 
       {/* Main Content */}
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-white rounded-xl shadow p-8 text-gray-800 leading-relaxed">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Overview</h2>
-          <p className="mb-8">${data.desc}</p>
+          <p className="mb-8">Find hungry talent to scale your startup.</p>
           
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Details</h2>
-          <p className="mb-6 font-medium text-lg">${data.section ? data.section : 'Explore our offerings and opportunities below.'}</p>
+          <p className="mb-6 font-medium text-lg">Special Startup Pricing: Get 3 free job posts.</p>
           
-          ${data.items ? `
-          <ul className="list-disc pl-5 space-y-2 mb-8">
-            ${data.items.map(item => `<li>${item}</li>`).join('')}
-          </ul>
-          ` : ''}
+          
 
           <div className="mt-12 bg-gray-50 p-6 rounded-lg border">
             <h3 className="text-lg font-bold mb-2">Need more help?</h3>

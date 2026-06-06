@@ -7,35 +7,31 @@ const Page = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Head>
-        <title>${data.title} - Internshala Clone</title>
-        <meta name="description" content="${data.desc}" />
+        <title>Career Blog - Internshala Clone</title>
+        <meta name="description" content="Resume Tips, Interview Guides, and Career Advice." />
       </Head>
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-4 text-center">
-        <h1 className="text-4xl font-extrabold mb-4">${data.title}</h1>
-        <p className="text-xl max-w-2xl mx-auto">${data.desc}</p>
+        <h1 className="text-4xl font-extrabold mb-4">Career Blog</h1>
+        <p className="text-xl max-w-2xl mx-auto">Resume Tips, Interview Guides, and Career Advice.</p>
       </div>
 
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto w-full px-4 py-4 text-sm text-gray-500">
-        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">${data.title}</span>
+        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">Career Blog</span>
       </div>
 
       {/* Main Content */}
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-white rounded-xl shadow p-8 text-gray-800 leading-relaxed">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Overview</h2>
-          <p className="mb-8">${data.desc}</p>
+          <p className="mb-8">Resume Tips, Interview Guides, and Career Advice.</p>
           
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Details</h2>
-          <p className="mb-6 font-medium text-lg">${data.section ? data.section : 'Explore our offerings and opportunities below.'}</p>
+          <p className="mb-6 font-medium text-lg">Trending: How to ace a Playwright automation interview.</p>
           
-          ${data.items ? `
-          <ul className="list-disc pl-5 space-y-2 mb-8">
-            ${data.items.map(item => `<li>${item}</li>`).join('')}
-          </ul>
-          ` : ''}
+          
 
           <div className="mt-12 bg-gray-50 p-6 rounded-lg border">
             <h3 className="text-lg font-bold mb-2">Need more help?</h3>
