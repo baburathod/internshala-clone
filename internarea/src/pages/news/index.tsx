@@ -1,36 +1,41 @@
 
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const Page = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Head>
-        <title>Company News - Internshala Clone</title>
-        <meta name="description" content="Product Updates, Feature Launches, and Announcements." />
+        <title>${data.title} - Internshala Clone</title>
+        <meta name="description" content="${data.desc}" />
       </Head>
 
       {/* Hero Section */}
       <div className="bg-blue-600 text-white py-20 px-4 text-center">
-        <h1 className="text-4xl font-extrabold mb-4">Company News</h1>
-        <p className="text-xl max-w-2xl mx-auto">Product Updates, Feature Launches, and Announcements.</p>
+        <h1 className="text-4xl font-extrabold mb-4">${data.title}</h1>
+        <p className="text-xl max-w-2xl mx-auto">${data.desc}</p>
       </div>
 
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto w-full px-4 py-4 text-sm text-gray-500">
-        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">Company News</span>
+        Home {'>'} Footer {'>'} <span className="font-semibold text-gray-800">${data.title}</span>
       </div>
 
       {/* Main Content */}
       <div className="flex-grow max-w-7xl mx-auto w-full px-4 py-12">
         <div className="bg-white rounded-xl shadow p-8 text-gray-800 leading-relaxed">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Overview</h2>
-          <p className="mb-8">Product Updates, Feature Launches, and Announcements.</p>
+          <p className="mb-8">${data.desc}</p>
           
           <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b pb-2">Details</h2>
-          <p className="mb-6 font-medium text-lg">Latest: Multi-language support launched globally!</p>
+          <p className="mb-6 font-medium text-lg">${data.section ? data.section : 'Explore our offerings and opportunities below.'}</p>
           
-          
+          ${data.items ? `
+          <ul className="list-disc pl-5 space-y-2 mb-8">
+            ${data.items.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+          ` : ''}
 
           <div className="mt-12 bg-gray-50 p-6 rounded-lg border">
             <h3 className="text-lg font-bold mb-2">Need more help?</h3>
@@ -42,9 +47,11 @@ const Page = () => {
       {/* CTA Section */}
       <div className="bg-gray-100 py-16 text-center border-t border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to start your journey?</h2>
-        <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
-          Get Started Now
-        </button>
+        <Link href="/">
+          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors cursor-pointer">
+            Get Started Now
+          </button>
+        </Link>
       </div>
     </div>
   );
