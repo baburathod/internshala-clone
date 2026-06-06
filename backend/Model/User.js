@@ -13,6 +13,7 @@ const UserSchema = new mongoose.Schema({
   applicationsUsedThisMonth: { type: Number, default: 0 },
   lastApplicationMonth: String, // format YYYY-MM
   role: { type: String, enum: ['Candidate', 'Employer', 'Admin'], default: 'Candidate' },
+  companyName: String,
   isBlocked: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 });

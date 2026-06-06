@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import API_BASE_URL from "@/config/api";
 import "@/config/i18n"; // Import i18n configuration
+import { ThemeProvider } from 'next-themes';
 
 function AuthListener({ setShowOtpModal, setPendingAuthUser }: { setShowOtpModal: any, setPendingAuthUser: any }) {
   const dispatch = useDispatch();
@@ -116,9 +117,10 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   return (
-    <Provider store={store}>
-      <AuthListener setShowOtpModal={setShowOtpModal} setPendingAuthUser={setPendingAuthUser} />
-      <div className="bg-white">
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <Provider store={store}>
+        <AuthListener setShowOtpModal={setShowOtpModal} setPendingAuthUser={setPendingAuthUser} />
+        <div className="bg-white dark:bg-gray-900 min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <ToastContainer/>
         <Navbar />
         <Component {...pageProps} />
@@ -154,5 +156,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
       )}
     </Provider>
+    </ThemeProvider>
   );
 }

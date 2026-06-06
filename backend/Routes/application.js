@@ -87,6 +87,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Employer: Get applications for their company
+router.get("/employer/:uid", async (req, res) => {
+  try {
+    const user = await User.findOne({ uid: req.params.uid });
+    if (!user || !user.companyName) {
+      return res.status(400).json({ error: "User is not associated with a company" });
+    }
+    
+    // Using RegExp for case-insensitive match
+    const data = await application.find({ company: new RegExp(`^${user.companyName}$`, 'i') });
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "internal server error" });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -101,30 +118,76 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+// We export notification directly or require it
+const notificationRouter = require("./notification");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "internshalaclone.auth@gmail.com", // use a dummy or real env
+    pass: "dummy_password", // Ideally use process.env.EMAIL_PASS
+  },
+});
+
+router.put("/status/:id", async (req, res) => {
   const { id } = req.params;
-  const { action } = req.body;
-  let status;
-  if (action === "accepted") {
-    status = "accepted";
-  } else if (action === "rejected") {
-    status = "rejected";
-  } else {
-    res.status(404).json({ error: "Invalid action" });
-    return;
+  const { status } = req.body;
+  
+  const validStatuses = ["pending", "reviewing", "interview", "hired", "rejected"];
+  if (!validStatuses.includes(status)) {
+    return res.status(400).json({ error: "Invalid status" });
   }
+
   try {
     const updateapplication = await application.findByIdAndUpdate(
       id,
       { $set: { status } },
       { new: true }
     );
+    
     if (!updateapplication) {
-      res.status(404).json({ error: "Not able to update the application" });
-      return;
+      return res.status(404).json({ error: "Not able to update the application" });
     }
-    res.status(200).json({ sucess: true, data: updateapplication });
+
+    // Trigger Notification for candidate
+    if (updateapplication.user && updateapplication.user.uid) {
+      const candidateUser = await User.findOne({ uid: updateapplication.user.uid });
+      if (candidateUser) {
+        await notificationRouter.createNotification(
+          candidateUser._id,
+          'ApplicationUpdate',
+          `Your application for ${updateapplication.company} has been updated to: ${status.toUpperCase()}`,
+          null,
+          '/userapplication'
+        );
+
+        // Send Email
+        if (candidateUser.email) {
+          const mailOptions = {
+            from: "internshalaclone.auth@gmail.com",
+            to: candidateUser.email,
+            subject: `Application Status Update: ${updateapplication.company}`,
+            html: `
+              <div style="font-family: Arial, sans-serif; padding: 20px;">
+                <h2 style="color: #008bdc;">Internshala Clone</h2>
+                <p>Hello ${candidateUser.name},</p>
+                <p>Your application status for the position at <strong>${updateapplication.company}</strong> has been updated to: <strong style="color: #2c3e50; text-transform: uppercase;">${status}</strong>.</p>
+                <p>Log in to your Candidate Dashboard to view the details.</p>
+                <br/>
+                <p>Best regards,<br/>The Internshala Clone Team</p>
+              </div>
+            `,
+          };
+          // Don't await transporter to avoid blocking the response, or catch error silently
+          transporter.sendMail(mailOptions).catch(err => console.error("Email send failed:", err));
+        }
+      }
+    }
+
+    res.status(200).json({ success: true, data: updateapplication });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "internal server error" });
   }
 });

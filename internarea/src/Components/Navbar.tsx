@@ -2,8 +2,9 @@ import React, { use, useEffect, useRef, useState } from "react";
 import logo from "../Assets/logo.png";
 import Link from "next/link";
 import { auth, provider } from "../firebase/firebase";
-import { ChevronDown, ChevronUp, Search, Menu, X, Globe, Bell } from "lucide-react";
+import { ChevronDown, ChevronUp, Search, Menu, X, Globe, Bell, MessageSquare, Moon, Sun } from "lucide-react";
 import { signInWithPopup, signOut } from "firebase/auth";
+import { useTheme } from "next-themes";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { selectuser, selectIsLoading } from "@/Feature/Userslice";
@@ -15,6 +16,10 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const user = useSelector(selectuser);
   const isLoading = useSelector(selectIsLoading);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLangMenu, setShowLangMenu] = useState(false);
   const [showFrenchOtp, setShowFrenchOtp] = useState(false);
@@ -199,6 +204,20 @@ const Navbar = () => {
                 <div className="w-24 h-8 bg-gray-200 animate-pulse rounded-lg"></div>
               ) : user ? (
                 <div className="relative flex items-center space-x-4">
+                  
+                  {/* Theme Toggle */}
+                  <button 
+                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    className="text-gray-600 hover:text-blue-600 focus:outline-none"
+                  >
+                    {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
+                  </button>
+
+                  {/* Messages Icon */}
+                  <Link href="/messages" className="text-gray-600 hover:text-blue-600 focus:outline-none relative">
+                    <MessageSquare size={24} />
+                  </Link>
+
                   {/* Notification Bell */}
                   <div className="relative">
                     <button 

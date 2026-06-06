@@ -10,7 +10,7 @@ const Applicationipschema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["accepted", "pending", "rejected"],
+    enum: ["pending", "reviewing", "interview", "hired", "rejected"],
     default: "pending",
   },
   Application: Object,
