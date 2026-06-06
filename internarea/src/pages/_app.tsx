@@ -23,7 +23,7 @@ function AuthListener({ setShowOtpModal, setPendingAuthUser }: { setShowOtpModal
       if (authuser) {
         // Silently sync user to backend MongoDB
         try {
-          await axios.post(`${API_BASE_URL}/api/users/sync`, {
+          await axios.post(`${API_BASE_URL}/api/auth/sync`, {
             uid: authuser.uid,
             name: authuser.displayName,
             email: authuser.email,

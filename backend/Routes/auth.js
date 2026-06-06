@@ -23,6 +23,26 @@ const getISTTime = () => {
   return new Date(utc + (3600000 * 5.5)); // +5:30
 };
 
+router.post("/sync", async (req, res) => {
+  try {
+    const { uid, name, email, photo } = req.body;
+    if (!uid || !email) return res.status(400).json({ error: "Missing required fields" });
+    
+    let user = await User.findOne({ uid });
+    if (!user) {
+      user = new User({ uid, name, email, photo });
+      await user.save();
+    } else {
+      user.name = name || user.name;
+      user.photo = photo || user.photo;
+      await user.save();
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.post("/verify-login", async (req, res) => {
   try {
     const { uid } = req.body;
