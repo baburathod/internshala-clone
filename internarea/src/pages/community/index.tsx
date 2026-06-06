@@ -14,6 +14,8 @@ const Community: React.FC = () => {
   const user = useSelector(selectuser);
   const [posts, setPosts] = useState<any[]>([]);
 
+  const [feedType, setFeedType] = useState<'recent' | 'trending'>('recent');
+
   const fetchPosts = () => {
     axios.get(`${API_BASE_URL}/api/posts`)
       .then(res => setPosts(res.data))
@@ -25,6 +27,16 @@ const Community: React.FC = () => {
       fetchPosts();
     }
   }, [user]);
+
+  const displayedPosts = [...posts].sort((a, b) => {
+    if (feedType === 'trending') {
+      const aScore = (a.likes?.length || 0) + (a.comments?.length || 0);
+      const bScore = (b.likes?.length || 0) + (b.comments?.length || 0);
+      return bScore - aScore;
+    }
+    // recent is default from backend, but let's ensure descending order by date
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
 
   return (
     <ProtectedRoute>
@@ -45,16 +57,26 @@ const Community: React.FC = () => {
               <div className="flex justify-between items-center mb-4 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
                 <h2 className="font-semibold text-gray-800">Your Feed</h2>
                 <div className="flex space-x-2">
-                  <button className="px-3 py-1 text-sm bg-blue-50 text-blue-600 font-medium rounded-full">Recent</button>
-                  <button className="px-3 py-1 text-sm text-gray-500 hover:bg-gray-50 font-medium rounded-full">Trending 🔥</button>
+                  <button 
+                    onClick={() => setFeedType('recent')}
+                    className={`px-3 py-1 text-sm font-medium rounded-full ${feedType === 'recent' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50'}`}
+                  >
+                    Recent
+                  </button>
+                  <button 
+                    onClick={() => setFeedType('trending')}
+                    className={`px-3 py-1 text-sm font-medium rounded-full ${feedType === 'trending' ? 'bg-blue-50 text-blue-600' : 'text-gray-500 hover:bg-gray-50'}`}
+                  >
+                    Trending 🔥
+                  </button>
                 </div>
               </div>
 
               <div className="space-y-6">
-                {posts.map(post => (
+                {displayedPosts.map(post => (
                   <PostCard key={post._id} post={post} onPostUpdated={fetchPosts} />
                 ))}
-                {posts.length === 0 && (
+                {displayedPosts.length === 0 && (
                   <div className="text-center py-10 bg-white rounded-lg shadow text-gray-500">
                     No posts yet. Be the first to start a conversation!
                   </div>

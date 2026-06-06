@@ -138,38 +138,38 @@ const Navbar = () => {
               </a>
             </div>
             {/* Navigation Links */}
-            <div className="hidden md:flex items-center space-x-8">
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+            <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/internship"}>
                   <span>{t('navbar.internships')}</span>
                 </Link>
               </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/job"}>
                   <span>{t('navbar.jobs')}</span>
                 </Link>
               </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/community"}>
                   <span>{t('navbar.community')}</span>
                 </Link>
               </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/subscriptions"}>
                   <span>{t('navbar.subscriptions')}</span>
                 </Link>
               </button>
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600">
+              <button className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap">
                 <Link href={"/resume-builder"}>
                   <span>Resume Builder</span>
                 </Link>
               </button>
-              <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
+              <div className="hidden lg:flex items-center bg-gray-100 rounded-full px-4 py-2 flex-shrink-0">
                 <Search size={16} className="text-gray-400" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="ml-2 bg-transparent focus:outline-none text-sm w-48"
+                  className="ml-2 bg-transparent focus:outline-none text-sm w-32 xl:w-48"
                 />
               </div>
             </div>
@@ -180,7 +180,7 @@ const Navbar = () => {
               <div className="relative">
                 <button 
                   onClick={() => setShowLangMenu(!showLangMenu)}
-                  className="flex items-center space-x-1 text-gray-700 hover:text-blue-600"
+                  className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 whitespace-nowrap"
                 >
                   <Globe size={20} />
                   <span className="uppercase">{i18n.language}</span>
@@ -203,7 +203,7 @@ const Navbar = () => {
               {isLoading ? (
                 <div className="w-24 h-8 bg-gray-200 animate-pulse rounded-lg"></div>
               ) : user ? (
-                <div className="relative flex items-center space-x-4">
+                <div className="relative flex items-center space-x-6">
                   
                   {/* Theme Toggle */}
                   <button 
