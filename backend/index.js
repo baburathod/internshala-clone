@@ -45,6 +45,8 @@ app.use("/api/subscription", subscriptionRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/messages", messageRoutes);
+const userRoutes = require("./Routes/user");
+app.use("/api/users", userRoutes);
 const adminRoutes = require("./Routes/admin");
 app.use("/api/admin", adminRoutes);
 app.use("/api/language", languageRoutes);

@@ -68,9 +68,9 @@ export default function Footer() {
             <i className="bi bi-google-play"></i> Get Android App
           </Link>
           <div className="flex space-x-4 mt-4 sm:mt-0">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer"><Facebook className="w-6 h-6 hover:text-blue-400 cursor-pointer" /></a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer"><Twitter className="w-6 h-6 hover:text-blue-400 cursor-pointer" /></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer"><Instagram className="w-6 h-6 hover:text-pink-400 cursor-pointer" /></a>
+            <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook"><Facebook className="w-6 h-6 hover:text-blue-400 cursor-pointer" /></a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer" aria-label="Twitter"><Twitter className="w-6 h-6 hover:text-blue-400 cursor-pointer" /></a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram className="w-6 h-6 hover:text-pink-400 cursor-pointer" /></a>
           </div>
           <p className="mt-4 sm:mt-0 text-sm text-gray-400">© Copyright 2026. All Rights Reserved.</p>
         </div>
