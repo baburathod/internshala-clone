@@ -133,8 +133,8 @@ const Navbar = () => {
           <div className="flex justify-between h-16 items-center">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <a href="/" className="text-xl font-bold text-blue-600">
-                <img src={"/logo.png"} alt="" className="h-16" />
+              <a href="/" className="text-xl font-bold text-blue-600" aria-label="Homepage">
+                <img src={"/logo.png"} alt="Internshala Clone Logo" className="h-16" />
               </a>
             </div>
             {/* Navigation Links */}
@@ -270,8 +270,9 @@ const Navbar = () => {
                     <button 
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
                       className="flex items-center focus:outline-none flex-shrink-0"
+                      aria-label="User Menu"
                     >
-                      <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
+                      <img src={user.photo} alt="User Avatar" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
                     </button>
                     
                     {isDropdownOpen && (
@@ -313,6 +314,7 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-gray-700 hover:text-blue-600 focus:outline-none"
+                aria-label="Toggle Mobile Menu"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
