@@ -2,7 +2,7 @@ import React, { use, useEffect, useRef, useState } from "react";
 import logo from "../Assets/logo.png";
 import Link from "next/link";
 import { auth, provider } from "../firebase/firebase";
-import { ChevronDown, ChevronUp, Search, Menu, X, Globe } from "lucide-react";
+import { ChevronDown, ChevronUp, Search, Menu, X, Globe, Bell } from "lucide-react";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
@@ -20,6 +20,43 @@ const Navbar = () => {
   const [showFrenchOtp, setShowFrenchOtp] = useState(false);
   const [frenchOtp, setFrenchOtp] = useState("");
   const [verifyingFrench, setVerifyingFrench] = useState(false);
+  
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      fetchNotifications();
+    }
+  }, [user]);
+
+  const fetchNotifications = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/notifications/${user.uid}`);
+      setNotifications(res.data);
+    } catch (error) {
+      console.error("Failed to fetch notifications");
+    }
+  };
+
+  const markNotificationAsRead = async (id: string, link: string) => {
+    try {
+      await axios.put(`${API_BASE_URL}/api/notifications/${id}/read`);
+      fetchNotifications();
+      if (link) window.location.href = link;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const markAllAsRead = async () => {
+    try {
+      await axios.put(`${API_BASE_URL}/api/notifications/mark-all-read/${user.uid}`);
+      fetchNotifications();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const languages = [
     { code: "en", name: "English" },
@@ -162,11 +199,64 @@ const Navbar = () => {
                 <div className="w-24 h-8 bg-gray-200 animate-pulse rounded-lg"></div>
               ) : user ? (
                 <div className="relative flex items-center space-x-4">
+                  {/* Notification Bell */}
+                  <div className="relative">
+                    <button 
+                      onClick={() => setShowNotifications(!showNotifications)}
+                      className="text-gray-600 hover:text-blue-600 focus:outline-none relative"
+                    >
+                      <Bell size={24} />
+                      {notifications.filter(n => !n.isRead).length > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                          {notifications.filter(n => !n.isRead).length}
+                        </span>
+                      )}
+                    </button>
+                    
+                    {showNotifications && (
+                      <div className="absolute right-0 mt-3 w-80 bg-white rounded-lg shadow-xl border overflow-hidden z-50">
+                        <div className="p-3 border-b flex justify-between items-center bg-gray-50">
+                          <h3 className="font-bold text-gray-800">Notifications</h3>
+                          <button onClick={markAllAsRead} className="text-xs text-blue-600 hover:underline">
+                            Mark all read
+                          </button>
+                        </div>
+                        <div className="max-h-96 overflow-y-auto">
+                          {notifications.length === 0 ? (
+                            <div className="p-4 text-center text-sm text-gray-500">No new notifications</div>
+                          ) : (
+                            notifications.map(notif => (
+                              <div 
+                                key={notif._id} 
+                                onClick={() => markNotificationAsRead(notif._id, notif.link)}
+                                className={`p-3 border-b cursor-pointer hover:bg-gray-50 transition ${!notif.isRead ? 'bg-blue-50/50' : ''}`}
+                              >
+                                <div className="flex space-x-3">
+                                  {notif.relatedUser?.photo && (
+                                    <img src={notif.relatedUser.photo} alt="" className="w-8 h-8 rounded-full flex-shrink-0" />
+                                  )}
+                                  <div>
+                                    <p className={`text-sm ${!notif.isRead ? 'font-semibold text-gray-900' : 'text-gray-700'}`}>
+                                      {notif.message}
+                                    </p>
+                                    <p className="text-xs text-gray-400 mt-1">
+                                      {new Date(notif.createdAt).toLocaleDateString()}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
                   <Link href={"/profile"}>
-                    <img src={user.photo} alt="" className="w-8 h-8 rounded-full" />
+                    <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
                   </Link>
                   <button
-                    className="text-gray-700 hover:text-blue-600"
+                    className="text-gray-700 hover:text-red-600 font-medium transition"
                     onClick={handlelogout}
                   >
                     {t('navbar.logout')}

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import API_BASE_URL from '@/config/api';
 import { 
   Briefcase, 
   Mail, 
@@ -8,13 +10,28 @@ import {
   Settings
 } from 'lucide-react';
 import Link from 'next/link';
-const index = () => {
-    const stats = [
-        { label: 'Total Applications', value: '2,345', change: '+12%', changeType: 'positive' },
-        { label: 'Active Jobs', value: '45', change: '+3%', changeType: 'positive' },
-        { label: 'Active Internships', value: '89', change: '+24%', changeType: 'positive' },
-        { label: 'Conversion Rate', value: '5.25%', change: '-1.3%', changeType: 'negative' },
-      ];
+
+const AdminPanel = () => {
+  const [statsData, setStatsData] = useState({
+    totalUsers: 0,
+    totalJobs: 0,
+    totalInternships: 0,
+    totalApplications: 0,
+    totalRevenue: 0
+  });
+
+  useEffect(() => {
+    axios.get(`${API_BASE_URL}/api/admin/analytics`)
+      .then(res => setStatsData(res.data))
+      .catch(err => console.error("Failed to fetch admin stats"));
+  }, []);
+
+  const stats = [
+    { label: 'Total Users', value: statsData.totalUsers, change: '+12%', changeType: 'positive' },
+    { label: 'Active Jobs', value: statsData.totalJobs, change: '+3%', changeType: 'positive' },
+    { label: 'Active Internships', value: statsData.totalInternships, change: '+24%', changeType: 'positive' },
+    { label: 'Total Applications', value: statsData.totalApplications, change: '+8%', changeType: 'positive' },
+  ];
     
       const menuItems = [
         {
@@ -130,4 +147,4 @@ const index = () => {
   )
 }
 
-export default index
+export default AdminPanel

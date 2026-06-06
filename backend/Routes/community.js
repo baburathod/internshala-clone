@@ -4,6 +4,7 @@ const User = require("../Model/User");
 const Post = require("../Model/Post");
 const Comment = require("../Model/Comment");
 const FriendRequest = require("../Model/FriendRequest");
+const notificationRouter = require("./notification");
 
 // ==========================================
 // Middleware: Posting Limit Enforcement
@@ -95,6 +96,16 @@ router.post("/friends/request", async (req, res) => {
 
     const friendReq = new FriendRequest({ sender: sender._id, receiver: receiverId });
     await friendReq.save();
+    
+    // Trigger notification
+    await notificationRouter.createNotification(
+      receiverId,
+      'FriendRequest',
+      `${sender.name} sent you a friend request.`,
+      sender._id,
+      '/community'
+    );
+
     res.status(201).json(friendReq);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -113,6 +124,16 @@ router.put("/friends/accept", async (req, res) => {
 
     await User.findByIdAndUpdate(friendReq.sender, { $addToSet: { friends: friendReq.receiver } });
     await User.findByIdAndUpdate(friendReq.receiver, { $addToSet: { friends: friendReq.sender } });
+
+    // Trigger notification to the sender
+    const receiverUser = await User.findById(friendReq.receiver);
+    await notificationRouter.createNotification(
+      friendReq.sender,
+      'FriendAccept',
+      `${receiverUser.name} accepted your friend request.`,
+      friendReq.receiver,
+      '/community'
+    );
 
     res.status(200).json({ message: "Friend request accepted" });
   } catch (error) {
@@ -203,6 +224,17 @@ router.put("/posts/:postId/like", async (req, res) => {
       post.likes.pull(user._id);
     } else {
       post.likes.push(user._id);
+      
+      // Trigger notification if liking someone else's post
+      if (post.user.toString() !== user._id.toString()) {
+        await notificationRouter.createNotification(
+          post.user,
+          'Like',
+          `${user.name} liked your post.`,
+          user._id,
+          `/community`
+        );
+      }
     }
     await post.save();
     res.status(200).json(post);
@@ -227,6 +259,19 @@ router.post("/posts/:postId/comment", async (req, res) => {
     await Post.findByIdAndUpdate(req.params.postId, {
       $push: { comments: comment._id }
     });
+
+    const post = await Post.findById(req.params.postId);
+    
+    // Trigger notification if commenting on someone else's post
+    if (post.user.toString() !== user._id.toString()) {
+      await notificationRouter.createNotification(
+        post.user,
+        'Comment',
+        `${user.name} commented on your post.`,
+        user._id,
+        `/community`
+      );
+    }
 
     res.status(201).json(comment);
   } catch (error) {
