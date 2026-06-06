@@ -203,7 +203,7 @@ const Navbar = () => {
               {isLoading ? (
                 <div className="w-24 h-8 bg-gray-200 animate-pulse rounded-lg"></div>
               ) : user ? (
-                <div className="relative flex items-center space-x-6">
+                <div className="relative flex items-center space-x-4 lg:space-x-6 flex-shrink-0">
                   
                   {/* Theme Toggle */}
                   <button 
@@ -271,14 +271,14 @@ const Navbar = () => {
                     )}
                   </div>
 
-                  <Link href={"/security"} className="text-gray-700 hover:text-blue-600 font-medium transition">
+                  <Link href={"/security"} className="text-gray-700 hover:text-blue-600 font-medium transition whitespace-nowrap">
                     Security
                   </Link>
-                  <Link href={"/profile"}>
+                  <Link href={"/profile"} className="flex-shrink-0">
                     <img src={user.photo} alt="" className="w-8 h-8 rounded-full ring-2 ring-transparent hover:ring-blue-500 transition" />
                   </Link>
                   <button
-                    className="text-gray-700 hover:text-red-600 font-medium transition"
+                    className="text-gray-700 hover:text-red-600 font-medium transition whitespace-nowrap"
                     onClick={handlelogout}
                   >
                     {t('navbar.logout')}
